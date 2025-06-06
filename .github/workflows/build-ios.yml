@@ -1,0 +1,32 @@
+name: Build .NET MAUI iOS App
+
+on:
+  pull_request:
+    branches:
+      - iOS-build-branch
+    types: [closed]
+
+jobs:
+  build-ios:
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'iOS-build-branch' && github.event.pull_request.head.ref == 'main'
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x' # Use your project's required version
+
+      - name: Install MAUI workload
+        run: dotnet workload install maui
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build iOS project
+        run: dotnet build -c Release -f:net9.0-ios
+
+      # Add more steps here as you need (test, artifact upload, etc.)
