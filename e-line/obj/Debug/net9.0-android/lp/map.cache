@@ -178,3 +178,9 @@ Xamarin.KotlinX.Coroutines.Core.aar
 Xamarin.KotlinX.Coroutines.Core.Jvm.aar
 Xamarin.KotlinX.Serialization.Core.aar
 Xamarin.KotlinX.Serialization.Core.Jvm.aar
+Xamarin.AndroidX.Core.ViewTree.dll
+Xamarin.Google.ErrorProne.TypeAnnotations.dll
+Xamarin.JSpecify.dll
+Xamarin.Google.ErrorProne.TypeAnnotations.aar
+Xamarin.JSpecify.aar
+androidx.core.core-viewtree.aar

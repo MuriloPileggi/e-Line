@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/mdm/e-Line/e-line/e-line.csproj": {}
+    "/home/mdm/Documents/e-Line/e-line/e-line.csproj": {}
   },
   "projects": {
-    "/home/mdm/e-Line/e-line/e-line.csproj": {
+    "/home/mdm/Documents/e-Line/e-line/e-line.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/mdm/e-Line/e-line/e-line.csproj",
+        "projectUniqueName": "/home/mdm/Documents/e-Line/e-line/e-line.csproj",
         "projectName": "e-line",
-        "projectPath": "/home/mdm/e-Line/e-line/e-line.csproj",
+        "projectPath": "/home/mdm/Documents/e-Line/e-line/e-line.csproj",
         "packagesPath": "/home/mdm/.nuget/packages/",
-        "outputPath": "/home/mdm/e-Line/e-line/obj/",
+        "outputPath": "/home/mdm/Documents/e-Line/e-line/obj/",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "configFilePaths": [
@@ -52,7 +52,7 @@
             },
             "Microsoft.Maui.Controls": {
               "target": "Package",
-              "version": "[9.0.51, )"
+              "version": "[9.0.82, )"
             },
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
@@ -72,6 +72,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[9.0.8, 9.0.8]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.Android": {
               "privateAssets": "all"
@@ -85,9 +91,6 @@
       },
       "runtimes": {
         "android-arm64": {
-          "#import": []
-        },
-        "android-x64": {
           "#import": []
         }
       }
