@@ -1,0 +1,6 @@
+@e_line.API_HostAddress = http://localhost:5148
+
+GET {{e_line.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
