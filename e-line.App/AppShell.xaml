@@ -6,9 +6,18 @@
     xmlns:local="clr-namespace:e_line.App"
     Title="e_line.App">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <ShellContent
+            Title="Map"
+            Icon="map.svg"
+            ContentTemplate="{DataTemplate local:MapPage}"
+            Route="MapPage" />
+
+        <ShellContent
+            Title="Settings"
+            Icon="cog.svg"
+            ContentTemplate="{DataTemplate local:SettingsPage}"
+            Route="SettingsPage" />
+    </TabBar>
 
 </Shell>

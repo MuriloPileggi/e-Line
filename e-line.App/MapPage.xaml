@@ -1,0 +1,15 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="e_line.App.MapPage"
+             Title="Map">
+    <Grid>
+        <WebView x:Name="mapWebView" />
+
+        <Button x:Name="PlanRouteButton"
+                Text="Plan Mock Route"
+                Clicked="OnPlanRouteClicked"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Margin="20" />
+    </Grid>
+</ContentPage>

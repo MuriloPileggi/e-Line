@@ -1,3 +1,5 @@
+using e_line.Api;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container 
@@ -25,37 +27,34 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors("AllowAny");
 
-// Define a simple test endpoint
-app.MapGet("/api/test", () =>
-{
-    return Results.Ok(new { Message = "Hello from Azure!" });
-});
+// New test endpoint
+app.MapGet("/api/test", () => new { Message = "Hello from local API!" });
 
-// Define the mock route planning endpoint
-app.MapPost("/api/route/plan", () =>
+// Add our mock route planning endpoint
+app.MapPost("/api/route/plan", (RoutePlanRequest request) =>
 {
-    // Hard coded response for now
-    var mockResponse = new
+    // For now we ignore request and return hard coded data
+    // This polyline represents a path from Guarulhos Airport to Av.Paulista
+    var polyline = "[[ -23.4322, -46.4692 ], [ -23.4389, -46.4800 ], [ -23.5215, -46.5218 ], [ -23.5300, -46.5333 ], [ -23.5489, -46.6377 ], [ -23.5613, -46.6565 ]]";
+
+    // This list represents chargins stations to make stops
+    var stops = new List<ChargingStation>
     {
-        routeId = "mock_123",
-        polyline = "yxrpA~}hbOA?@A@?@?@A@?@A?@A?@A?@A?@?@?@?@?@A?@A?@A@?@A@??@A?@A?",
-        etaSec = 7200, // 2 hours
-        distanceKm = 150.5,
-        stops = new[] {
-            new {
-                stationId = "mock_charger_1",
-                arriveSoc = 15.0,
-                departSoc = 80.0,
-                minutes = 45,
-                connectorType = "CCS2",
-                powerKw = 50
-            }
-        }
+        new ChargingStation(
+            "Shopping Center Norte",
+            new GeoPoint(-23.5215, -46.6565),
+            150
+        ),
+        new ChargingStation(
+            "Trianon-Masp",
+            new GeoPoint(-23.5613, -46.6565),
+            50
+        )
     };
 
-    return Results.Ok(mockResponse);
+    var response = new RoutePlanResponse(polyline, stops);
+    return Results.Ok(response);
 });
 
 app.Run();

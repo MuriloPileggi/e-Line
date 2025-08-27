@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-g" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <title>e-line Map</title>
+    <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/3/atlas.min.css" type="text/css" />
+    <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/3/atlas.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #myMap {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="myMap"></div>
+    <script type="text/javascript">
+        // --- Configuration ---
+        // IMPORTANT: Replace this with your actual Azure Maps Primary Key
+        const subscriptionKey = ''; 
+
+        // Coordinates for São Paulo, Brazil
+        const saoPauloCenter = [-46.6333, -23.5505]; 
+
+        let map;
+        let routeLayer;
+        let pinsLayer;
+
+        // --- Map Initialization ---
+        function initializeMap() {
+            map = new atlas.Map('myMap', {
+                center: saoPauloCenter,
+                zoom: 12,
+                language: 'pt-BR', // Set language to Brazilian Portuguese
+                authOptions: {
+                    authType: 'subscriptionKey',
+                    subscriptionKey: subscriptionKey
+                }
+            });
+        }
+
+        function drawRoute(polylineString) {
+            // Ensure map is ready
+            if (!map) return;
+
+            // Clear any existing route
+            if (routeLayer) {
+                map.layers.remove(routeLayer);
+            }
+            if (map.sources.getById('routeDataSource')) {
+                map.sources.remove('routeDataSource');
+            }
+
+            const coordinates = JSON.parse(polylineString);
+
+            // Create a data source with specific ID and add the route line to it
+            const dataSource = new atlas.source.DataSource('routeDataSource');
+            map.sources.add(dataSource);
+            dataSource.add(new atlas.data.LineString(coordinates.map(c => [c[1], c[0]]))); // Note: Atlas uses [lon, lat]
+
+            // Create a layer to render the route line
+            routeLayer = new atlas.layer.LineLayer(dataSource, null, {
+                strokeColor: '#0078FF',
+                strokeWidth: 5
+            });
+            map.layers.add(routeLayer, 'labels'); // Add layer below labels
+        }
+
+        function addChargingStops(stopsString) {
+            if (!map) return;
+
+            if (pinsLayer) {
+                map.layers.remove(pinsLayer);
+            }
+            if (map.sources.getById('pinsDataSource')) {
+                map.sources.remove('pinsDataSource');
+            }
+
+            const stops = JSON.parse(stopsString);
+
+            const pinsDataSource = new atlas.source.DataSource('pinsDataSource');
+            map.sources.add(pinsDataSource);
+
+            stops.forEach(stop => {
+                const point = new atlas.data.Point([stop.location.longitude, stop.location.latitude]);
+                pinsDataSource.add(point);
+            });
+
+            pinsLayer = new atlas.layer.SymbolLayer(pinsDataSource, null, {
+                iconOptions: {
+                    allowOverlap: true
+                }
+            });
+
+            map.layers.add(pinsLayer);
+        }
+
+        // Wait for the DOM to be ready before initializing the map
+        document.addEventListener('DOMContentLoaded', initializeMap);
+    </script>
+</body>
+</html>

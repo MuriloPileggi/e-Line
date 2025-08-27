@@ -1,0 +1,28 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="e_line.App.SettingsPage"
+             Title="Settings">
+    <VerticalStackLayout Padding="30" Spacing="25">
+        <Label 
+            Text="App Settings"
+            FontSize="32"
+            HorizontalOptions="Center" />
+        <Label 
+            Text="EV Model selection and other options will go here."
+            FontSize="18"
+            HorizontalOptions="Center" />
+
+        <Border Stroke="LightGray"
+                StrokeThickness="1"
+                Padding="10">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="8" />
+            </Border.StrokeShape>
+            
+            <VerticalStackLayout>
+                <Label Text="API Connection Status:" FontAttributes="Bold"/>
+                <Label x:Name="ApiMessageLabel" Text="Connecting..." />
+            </VerticalStackLayout>
+        </Border>
+    </VerticalStackLayout>
+</ContentPage>
