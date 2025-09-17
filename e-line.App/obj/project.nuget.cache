@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "kMG5xYCkCuc=",
+  "dgSpecHash": "5trQEPXXvOA=",
   "success": true,
   "projectFilePath": "/home/mdm/Documents/e-Line/e-line.App/e-line.App.csproj",
   "expectedPackageFiles": [
+    "/home/mdm/.nuget/packages/communitytoolkit.maui/12.2.0/communitytoolkit.maui.12.2.0.nupkg.sha512",
+    "/home/mdm/.nuget/packages/communitytoolkit.maui.core/12.2.0/communitytoolkit.maui.core.12.2.0.nupkg.sha512",
     "/home/mdm/.nuget/packages/googlegson/2.13.0.1/googlegson.2.13.0.1.nupkg.sha512",
     "/home/mdm/.nuget/packages/microsoft.extensions.configuration/9.0.8/microsoft.extensions.configuration.9.0.8.nupkg.sha512",
     "/home/mdm/.nuget/packages/microsoft.extensions.configuration.abstractions/9.0.8/microsoft.extensions.configuration.abstractions.9.0.8.nupkg.sha512",
@@ -19,14 +21,14 @@
     "/home/mdm/.nuget/packages/microsoft.extensions.options/9.0.8/microsoft.extensions.options.9.0.8.nupkg.sha512",
     "/home/mdm/.nuget/packages/microsoft.extensions.options.configurationextensions/9.0.8/microsoft.extensions.options.configurationextensions.9.0.8.nupkg.sha512",
     "/home/mdm/.nuget/packages/microsoft.extensions.primitives/9.0.8/microsoft.extensions.primitives.9.0.8.nupkg.sha512",
-    "/home/mdm/.nuget/packages/microsoft.maui.controls/9.0.82/microsoft.maui.controls.9.0.82.nupkg.sha512",
-    "/home/mdm/.nuget/packages/microsoft.maui.controls.build.tasks/9.0.82/microsoft.maui.controls.build.tasks.9.0.82.nupkg.sha512",
-    "/home/mdm/.nuget/packages/microsoft.maui.controls.core/9.0.82/microsoft.maui.controls.core.9.0.82.nupkg.sha512",
-    "/home/mdm/.nuget/packages/microsoft.maui.controls.xaml/9.0.82/microsoft.maui.controls.xaml.9.0.82.nupkg.sha512",
-    "/home/mdm/.nuget/packages/microsoft.maui.core/9.0.82/microsoft.maui.core.9.0.82.nupkg.sha512",
-    "/home/mdm/.nuget/packages/microsoft.maui.essentials/9.0.82/microsoft.maui.essentials.9.0.82.nupkg.sha512",
-    "/home/mdm/.nuget/packages/microsoft.maui.graphics/9.0.82/microsoft.maui.graphics.9.0.82.nupkg.sha512",
-    "/home/mdm/.nuget/packages/microsoft.maui.resizetizer/9.0.82/microsoft.maui.resizetizer.9.0.82.nupkg.sha512",
+    "/home/mdm/.nuget/packages/microsoft.maui.controls/9.0.90/microsoft.maui.controls.9.0.90.nupkg.sha512",
+    "/home/mdm/.nuget/packages/microsoft.maui.controls.build.tasks/9.0.90/microsoft.maui.controls.build.tasks.9.0.90.nupkg.sha512",
+    "/home/mdm/.nuget/packages/microsoft.maui.controls.core/9.0.90/microsoft.maui.controls.core.9.0.90.nupkg.sha512",
+    "/home/mdm/.nuget/packages/microsoft.maui.controls.xaml/9.0.90/microsoft.maui.controls.xaml.9.0.90.nupkg.sha512",
+    "/home/mdm/.nuget/packages/microsoft.maui.core/9.0.90/microsoft.maui.core.9.0.90.nupkg.sha512",
+    "/home/mdm/.nuget/packages/microsoft.maui.essentials/9.0.90/microsoft.maui.essentials.9.0.90.nupkg.sha512",
+    "/home/mdm/.nuget/packages/microsoft.maui.graphics/9.0.90/microsoft.maui.graphics.9.0.90.nupkg.sha512",
+    "/home/mdm/.nuget/packages/microsoft.maui.resizetizer/9.0.90/microsoft.maui.resizetizer.9.0.90.nupkg.sha512",
     "/home/mdm/.nuget/packages/microsoft.net.illink.tasks/9.0.5/microsoft.net.illink.tasks.9.0.5.nupkg.sha512",
     "/home/mdm/.nuget/packages/xamarin.android.glide/4.16.0.12/xamarin.android.glide.4.16.0.12.nupkg.sha512",
     "/home/mdm/.nuget/packages/xamarin.android.glide.annotations/4.16.0.12/xamarin.android.glide.annotations.4.16.0.12.nupkg.sha512",
@@ -117,7 +119,7 @@
     "/home/mdm/.nuget/packages/xamarin.kotlinx.coroutines.core.jvm/1.9.0.3/xamarin.kotlinx.coroutines.core.jvm.1.9.0.3.nupkg.sha512",
     "/home/mdm/.nuget/packages/xamarin.kotlinx.serialization.core/1.7.3.4/xamarin.kotlinx.serialization.core.1.7.3.4.nupkg.sha512",
     "/home/mdm/.nuget/packages/xamarin.kotlinx.serialization.core.jvm/1.7.3.4/xamarin.kotlinx.serialization.core.jvm.1.7.3.4.nupkg.sha512",
-    "/home/mdm/.nuget/packages/microsoft.netcore.app.ref/9.0.8/microsoft.netcore.app.ref.9.0.8.nupkg.sha512"
+    "/home/mdm/.nuget/packages/microsoft.netcore.app.ref/9.0.9/microsoft.netcore.app.ref.9.0.9.nupkg.sha512"
   ],
   "logs": []
 }

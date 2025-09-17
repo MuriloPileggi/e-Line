@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="e_line.App.TripPreviewPopup"
+               VerticalOptions="End">
+
+    <Border StrokeShape="RoundRectangle 12,12,0,0"
+            StrokeThickness="0"
+            BackgroundColor="{AppThemeBinding Light=White, Dark=#1C1C1E}"
+            Padding="0">
+        <VerticalStackLayout Padding="20, 25" Spacing="15">
+            <Label Text="Trip Summary"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" Padding="10">
+                <Label Grid.Row="0" Grid.Column="0" Text="Total Time" FontAttributes="Bold" />
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding TotalTime}" HorizontalTextAlignment="End" />
+
+                <Label Grid.Row="1" Grid.Column="0" Text="Total Distance" FontAttributes="Bold" />
+                <Label Grid.Row="1" Grid.Column="1" Text="{Binding TotalDistance}" HorizontalTextAlignment="End" />
+            </Grid>
+            
+            <Border StrokeShape="RoundRectangle 8" Padding="10" IsVisible="{Binding HasChargingStop}">
+                <VerticalStackLayout>
+                     <Label Text="Charging Stops" FontAttributes="Bold" />
+                     <Label Text="{Binding ChargingStopSummary}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Button Text="Start Navigation"
+                    Margin="0,20,0,0"
+                    Clicked="OnStartNavigationClicked" />
+        </VerticalStackLayout>
+    </Border>
+</toolkit:Popup>

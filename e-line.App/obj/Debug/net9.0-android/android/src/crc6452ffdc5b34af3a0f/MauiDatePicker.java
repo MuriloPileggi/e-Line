@@ -11,6 +11,7 @@ public class MauiDatePicker
 	public static final String __md_methods;
 	static {
 		__md_methods = 
+			"n_getDefaultMovementMethod:()Landroid/text/method/MovementMethod;:GetGetDefaultMovementMethodHandler\n" +
 			"n_onClick:(Landroid/view/View;)V:GetOnClick_Landroid_view_View_Handler:Android.Views.View/IOnClickListenerInvoker, Mono.Android, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null\n" +
 			"";
 		mono.android.Runtime.register ("Microsoft.Maui.Platform.MauiDatePicker, Microsoft.Maui", MauiDatePicker.class, __md_methods);
@@ -39,6 +40,13 @@ public class MauiDatePicker
 			mono.android.TypeManager.Activate ("Microsoft.Maui.Platform.MauiDatePicker, Microsoft.Maui", "Android.Content.Context, Mono.Android:Android.Util.IAttributeSet, Mono.Android:System.Int32, System.Private.CoreLib", this, new java.lang.Object[] { p0, p1, p2 });
 		}
 	}
+
+	public android.text.method.MovementMethod getDefaultMovementMethod ()
+	{
+		return n_getDefaultMovementMethod ();
+	}
+
+	private native android.text.method.MovementMethod n_getDefaultMovementMethod ();
 
 	public void onClick (android.view.View p0)
 	{

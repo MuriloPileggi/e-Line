@@ -53,3 +53,9 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = e_line.App.SettingsPage.xaml
 build_metadata.AdditionalFiles.TargetPath = SettingsPage.xaml
 build_metadata.AdditionalFiles.RelativePath = SettingsPage.xaml
+
+[/home/mdm/Documents/e-Line/e-line.App/TripPreviewPopup.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = e_line.App.TripPreviewPopup.xaml
+build_metadata.AdditionalFiles.TargetPath = TripPreviewPopup.xaml
+build_metadata.AdditionalFiles.RelativePath = TripPreviewPopup.xaml

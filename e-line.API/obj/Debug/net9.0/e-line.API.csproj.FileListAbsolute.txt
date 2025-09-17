@@ -30,3 +30,8 @@
 /home/mdm/Documents/e-Line/e-line.API/obj/Debug/net9.0/e-line.API.pdb
 /home/mdm/Documents/e-Line/e-line.API/obj/Debug/net9.0/e-line.API.genruntimeconfig.cache
 /home/mdm/Documents/e-Line/e-line.API/obj/Debug/net9.0/ref/e-line.API.dll
+/home/mdm/Documents/e-Line/e-line.API/bin/Debug/net9.0/Azure.Core.dll
+/home/mdm/Documents/e-Line/e-line.API/bin/Debug/net9.0/Azure.Maps.Routing.dll
+/home/mdm/Documents/e-Line/e-line.API/bin/Debug/net9.0/Microsoft.Bcl.AsyncInterfaces.dll
+/home/mdm/Documents/e-Line/e-line.API/bin/Debug/net9.0/System.ClientModel.dll
+/home/mdm/Documents/e-Line/e-line.API/bin/Debug/net9.0/System.Memory.Data.dll

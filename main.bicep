@@ -97,3 +97,16 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
     accessPolicies: [] // Will need to add access policy to add se
   }
 }
+
+// 6. Azure Maps Account: Provides routing, traffic, and other geographic services
+resource mapsAccount 'Microsoft.Maps/accounts@2023-06-01' = {
+  name: 'maps-${projectName}-prod-br'
+  location: 'global' // Maps accounts are global resources
+  sku: {
+    name: 'G2' 
+  }
+  kind: 'Gen2'
+  properties: {
+    // Required for gen2 sku
+  }
+}
