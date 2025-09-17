@@ -33,7 +33,7 @@ public partial class MapPage : ContentPage
                 new M_GeoPoint(-23.4356, -46.4778),
                 new M_GeoPoint(-23.573964069279068, -46.62321774553537),
                 EvModelId: 2, // BYD Dolphin
-                StartSoC: 0.05
+                StartSoC: 0.95
             );
 
             // Call our mock API endpoint

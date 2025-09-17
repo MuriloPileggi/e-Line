@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("e-line.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b67f453338e33641a8f115eec64ef8de7594edd7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bb6f002ea0d6ac351dffb4693713fddff1389538")]
 [assembly: System.Reflection.AssemblyProductAttribute("e-line.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("e-line.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

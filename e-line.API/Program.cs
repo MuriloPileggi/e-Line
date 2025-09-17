@@ -33,6 +33,9 @@ builder.Services.AddCors(options =>
 // Register Optimizer for dependency injection
 builder.Services.AddSingleton<EvOptimizer>();
 
+// Registor OpenChargeMapService with a dedicated HttpClient
+builder.Services.AddHttpClient<OpenChargeMapService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline
@@ -50,7 +53,7 @@ app.UseHttpsRedirection();
 app.MapGet("/api/test", () => new { Message = "Hello from local API!" });
 
 // Azure maps route planning endpoint
-app.MapPost("/api/route/plan", async (RoutePlanRequest request, MapsRoutingClient client, EvOptimizer optimizer) =>
+app.MapPost("/api/route/plan", async (RoutePlanRequest request, MapsRoutingClient client, EvOptimizer optimizer, OpenChargeMapService ocmService) =>
 {
     // Get selected EV Model
     var evModel = EVDatabase.GetModelById(request.EvModelId);
@@ -79,11 +82,22 @@ app.MapPost("/api/route/plan", async (RoutePlanRequest request, MapsRoutingClien
     var polyline = JsonSerializer.Serialize(polylineForJS);
 
     // Use optimizer to calculate charging stops
+    var requiredStops = new List<ChargingStation>();
     var routeDistanceMeters = routeLeg.Summary.LengthInMeters;
-    var requiredStops = optimizer.CalculateRequiredStops(routeDistanceMeters, evModel, request.StartSoC);
+    var stopRequired = optimizer.IsStopRequired(routeDistanceMeters, evModel, request.StartSoC);
+
+    if (stopRequired)
+    {
+        // If a stop is needed find chargers near the middle of the route
+        var midpointIndex = pointCoordinates.Count / 2;
+        var midpoint = pointCoordinates[midpointIndex];
+        var midpointGeoPoint = new M_GeoPoint(midpoint.Latitude, midpoint.Longitude);
+
+        requiredStops = await ocmService.GetChargersNearPoint(midpointGeoPoint);
+    }
 
     // Create and return response
-    var response = new RoutePlanResponse(
+        var response = new RoutePlanResponse(
         polyline, 
         requiredStops,
         TotalDistanceKm: routeDistanceMeters / 1000.0,

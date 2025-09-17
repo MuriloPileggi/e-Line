@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "HH4miuT1iS8=",
+  "dgSpecHash": "ssjljCO9/MU=",
   "success": true,
   "projectFilePath": "/home/mdm/Documents/e-Line/e-line.API/e-line.API.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "/home/mdm/.nuget/packages/azure.maps.routing/1.0.0-beta.4/azure.maps.routing.1.0.0-beta.4.nupkg.sha512",
     "/home/mdm/.nuget/packages/microsoft.aspnetcore.openapi/9.0.5/microsoft.aspnetcore.openapi.9.0.5.nupkg.sha512",
     "/home/mdm/.nuget/packages/microsoft.bcl.asyncinterfaces/6.0.0/microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
+    "/home/mdm/.nuget/packages/microsoft.cognitiveservices.speech/1.46.0/microsoft.cognitiveservices.speech.1.46.0.nupkg.sha512",
     "/home/mdm/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "/home/mdm/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512",
     "/home/mdm/.nuget/packages/swashbuckle.aspnetcore/6.6.2/swashbuckle.aspnetcore.6.6.2.nupkg.sha512",

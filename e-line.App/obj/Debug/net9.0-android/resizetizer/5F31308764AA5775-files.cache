@@ -5,8 +5,8 @@ obj/Debug/net9.0-android/resizetizer/r/mipmap-mdpi/appicon_background.png
 obj/Debug/net9.0-android/resizetizer/r/mipmap-mdpi/appicon_foreground.png
 obj/Debug/net9.0-android/resizetizer/r/mipmap-mdpi/appicon.png
 obj/Debug/net9.0-android/resizetizer/r/mipmap-mdpi/appicon_round.png
-obj/Debug/net9.0-android/resizetizer/r/drawable-hdpi/map.png
 obj/Debug/net9.0-android/resizetizer/r/drawable-hdpi/cog.png
+obj/Debug/net9.0-android/resizetizer/r/drawable-hdpi/map.png
 obj/Debug/net9.0-android/resizetizer/r/drawable-hdpi/dotnet_bot.png
 obj/Debug/net9.0-android/resizetizer/r/drawable-xhdpi/map.png
 obj/Debug/net9.0-android/resizetizer/r/drawable-xhdpi/cog.png

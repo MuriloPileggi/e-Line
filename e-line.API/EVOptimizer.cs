@@ -5,10 +5,8 @@ public class EvOptimizer
     // Saffety buffer for battery
     private const double SafetyMarginSoC = 0.10; // 10%
 
-    public List<ChargingStation> CalculateRequiredStops(double? routeDistanceMeters, EVModel ev, double startSoC)
+    public bool IsStopRequired(double? routeDistanceMeters, EVModel ev, double startSoC)
     {
-        var requiredStops = new List<ChargingStation>();
-
         // Calculate the energy required for the trip
         var routeDistanceKm = routeDistanceMeters / 1000.0;
         var energyNeededKwh = routeDistanceKm * ev.KwhPerKm;
@@ -20,10 +18,10 @@ public class EvOptimizer
         if (energyAvailableKwh >= energyNeededKwh)
         {
             // No stops needed
-            return requiredStops;
+            return false;
         }
 
-        // If a charge is needed, add a stop
+        /* // If a charge is needed, add a stop
         // For now hard-coded stops as place holders
         requiredStops.Add(
             new ChargingStation(
@@ -31,8 +29,8 @@ public class EvOptimizer
                 new M_GeoPoint(-23.5215, -46.6245),
                 150
             )
-        );
+        ); */
 
-        return requiredStops;
+        return true;
     }
 }

@@ -110,3 +110,28 @@ resource mapsAccount 'Microsoft.Maps/accounts@2023-06-01' = {
     // Required for gen2 sku
   }
 }
+
+// 7. Azure Cache for Redis: For caching OCM API calls and traffic data
+resource redisCache 'Microsoft.Cache/Redis@2023-08-01' = {
+  name: 'cache-${projectName}-prod-br'
+  location: location
+  properties: {
+    sku: {
+      name: 'Basic'
+      family: 'C'
+      capacity: 0 // C0 is the smallest size
+    }
+    enableNonSslPort: false
+    minimumTlsVersion: '1.2'
+  }
+}
+
+// 8. Azure AI Speech: For Speech-to-Text and Text-to-Speech services
+resource speechService 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
+  name: 'speech-${projectName}-prod-br'
+  location: location // Brazil South is a supported region
+  sku: {
+    name: 'F0' // Free tier
+  }
+  kind: 'SpeechServices'
+}

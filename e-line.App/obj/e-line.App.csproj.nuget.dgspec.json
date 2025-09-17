@@ -50,6 +50,10 @@
               "target": "Package",
               "version": "[12.2.0, )"
             },
+            "Microsoft.CognitiveServices.Speech": {
+              "target": "Package",
+              "version": "[1.46.0, )"
+            },
             "Microsoft.Extensions.Http": {
               "target": "Package",
               "version": "[9.0.8, )"
