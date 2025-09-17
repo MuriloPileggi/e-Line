@@ -112,11 +112,11 @@ target triple = "x86_64-unknown-linux-android21"
 	i32 3, ; uint32_t package_naming_policy
 	i32 6, ; uint32_t environment_variable_count
 	i32 0, ; uint32_t system_property_count
-	i32 320, ; uint32_t number_of_assemblies_in_apk
+	i32 341, ; uint32_t number_of_assemblies_in_apk
 	i32 65, ; uint32_t bundled_assembly_name_width
-	i32 40, ; uint32_t number_of_dso_cache_entries
+	i32 60, ; uint32_t number_of_dso_cache_entries
 	i32 0, ; uint32_t number_of_aot_cache_entries
-	i32 10, ; uint32_t number_of_shared_libraries
+	i32 15, ; uint32_t number_of_shared_libraries
 	i32 u0x0200135e, ; uint32_t android_runtime_jnienv_class_token
 	i32 u0x0601395a, ; uint32_t jnienv_initialize_method_token
 	i32 u0x06013959, ; uint32_t jnienv_registerjninatives_method_token
@@ -127,7 +127,7 @@ target triple = "x86_64-unknown-linux-android21"
 }, align 16
 
 ; DSO cache entries
-@dso_cache = dso_local local_unnamed_addr global [40 x %struct.DSOCacheEntry] [
+@dso_cache = dso_local local_unnamed_addr global [60 x %struct.DSOCacheEntry] [
 	%struct.DSOCacheEntry {
 		i64 u0x01848c0093f0afd8, ; from name: libSystem.Security.Cryptography.Native.Android
 		i64 u0x4818e42ca66bbd75, ; uint64_t real_name_hash
@@ -157,263 +157,403 @@ target triple = "x86_64-unknown-linux-android21"
 		ptr null; void* handle
 	}, ; 3
 	%struct.DSOCacheEntry {
+		i64 u0x1989cca866217d77, ; from name: libMicrosoft.CognitiveServices.Speech.extension.kws.ort
+		i64 u0x6d4e983509096d4d, ; uint64_t real_name_hash
+		i1 false, ; bool ignore
+		ptr @.DSOCacheEntry.12_name, ; name: libMicrosoft.CognitiveServices.Speech.extension.kws.ort.so
+		ptr null; void* handle
+	}, ; 4
+	%struct.DSOCacheEntry {
 		i64 u0x1a1918dd01662b19, ; from name: libmonosgen-2.0.so
 		i64 u0x1a1918dd01662b19, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.7_name, ; name: libmonosgen-2.0.so
 		ptr null; void* handle
-	}, ; 4
+	}, ; 5
 	%struct.DSOCacheEntry {
 		i64 u0x21cc3326a27c28e1, ; from name: xamarin-debug-app-helper.so
 		i64 u0x641102ea13f025b2, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.9_name, ; name: libxamarin-debug-app-helper.so
 		ptr null; void* handle
-	}, ; 5
+	}, ; 6
 	%struct.DSOCacheEntry {
 		i64 u0x28b5c8fca080abd5, ; from name: libSystem.Globalization.Native
 		i64 u0x74b568291c419777, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.0_name, ; name: libSystem.Globalization.Native.so
 		ptr null; void* handle
-	}, ; 6
+	}, ; 7
 	%struct.DSOCacheEntry {
 		i64 u0x2b87bb6ac8822015, ; from name: libmonodroid
 		i64 u0x4434c7fd110c8d8b, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.8_name, ; name: libmonodroid.so
 		ptr null; void* handle
-	}, ; 7
+	}, ; 8
+	%struct.DSOCacheEntry {
+		i64 u0x2c4481b0138cd06b, ; from name: Microsoft.CognitiveServices.Speech.extension.lu
+		i64 u0xefd31b7103827d3c, ; uint64_t real_name_hash
+		i1 false, ; bool ignore
+		ptr @.DSOCacheEntry.14_name, ; name: libMicrosoft.CognitiveServices.Speech.extension.lu.so
+		ptr null; void* handle
+	}, ; 9
+	%struct.DSOCacheEntry {
+		i64 u0x36c7822c8c841885, ; from name: Microsoft.CognitiveServices.Speech.extension.kws.ort
+		i64 u0x6d4e983509096d4d, ; uint64_t real_name_hash
+		i1 false, ; bool ignore
+		ptr @.DSOCacheEntry.12_name, ; name: libMicrosoft.CognitiveServices.Speech.extension.kws.ort.so
+		ptr null; void* handle
+	}, ; 10
 	%struct.DSOCacheEntry {
 		i64 u0x3807dd20062deb45, ; from name: monodroid
 		i64 u0x4434c7fd110c8d8b, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.8_name, ; name: libmonodroid.so
 		ptr null; void* handle
-	}, ; 8
+	}, ; 11
+	%struct.DSOCacheEntry {
+		i64 u0x3eae7d6a0d5a68cf, ; from name: libMicrosoft.CognitiveServices.Speech.extension.lu
+		i64 u0xefd31b7103827d3c, ; uint64_t real_name_hash
+		i1 false, ; bool ignore
+		ptr @.DSOCacheEntry.14_name, ; name: libMicrosoft.CognitiveServices.Speech.extension.lu.so
+		ptr null; void* handle
+	}, ; 12
+	%struct.DSOCacheEntry {
+		i64 u0x3f2f82a2d4f1c768, ; from name: Microsoft.CognitiveServices.Speech.extension.kws.ort.so
+		i64 u0x6d4e983509096d4d, ; uint64_t real_name_hash
+		i1 false, ; bool ignore
+		ptr @.DSOCacheEntry.12_name, ; name: libMicrosoft.CognitiveServices.Speech.extension.kws.ort.so
+		ptr null; void* handle
+	}, ; 13
+	%struct.DSOCacheEntry {
+		i64 u0x3fc6885d449b92f3, ; from name: Microsoft.CognitiveServices.Speech.core
+		i64 u0x4fbef0a5115eaa92, ; uint64_t real_name_hash
+		i1 false, ; bool ignore
+		ptr @.DSOCacheEntry.10_name, ; name: libMicrosoft.CognitiveServices.Speech.core.so
+		ptr null; void* handle
+	}, ; 14
 	%struct.DSOCacheEntry {
 		i64 u0x40f32024ffd1c0be, ; from name: System.IO.Compression.Native.so
 		i64 u0xc3cb80650fe5a0ab, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.1_name, ; name: libSystem.IO.Compression.Native.so
 		ptr null; void* handle
-	}, ; 9
+	}, ; 15
 	%struct.DSOCacheEntry {
 		i64 u0x4434c7fd110c8d8b, ; from name: libmonodroid.so
 		i64 u0x4434c7fd110c8d8b, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.8_name, ; name: libmonodroid.so
 		ptr null; void* handle
-	}, ; 10
+	}, ; 16
 	%struct.DSOCacheEntry {
 		i64 u0x4818e42ca66bbd75, ; from name: libSystem.Security.Cryptography.Native.Android.so
 		i64 u0x4818e42ca66bbd75, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.3_name, ; name: libSystem.Security.Cryptography.Native.Android.so
 		ptr null; void* handle
-	}, ; 11
+	}, ; 17
 	%struct.DSOCacheEntry {
 		i64 u0x486aa459231fc98b, ; from name: mono-component-hot_reload
 		i64 u0xb9c2fcad5704a3c9, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.5_name, ; name: libmono-component-hot_reload.so
 		ptr null; void* handle
-	}, ; 12
+	}, ; 18
 	%struct.DSOCacheEntry {
 		i64 u0x49959b1b390dc809, ; from name: xamarin-debug-app-helper
 		i64 u0x641102ea13f025b2, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.9_name, ; name: libxamarin-debug-app-helper.so
 		ptr null; void* handle
-	}, ; 13
+	}, ; 19
+	%struct.DSOCacheEntry {
+		i64 u0x4c11c34a04a0d2ae, ; from name: libMicrosoft.CognitiveServices.Speech.core
+		i64 u0x4fbef0a5115eaa92, ; uint64_t real_name_hash
+		i1 false, ; bool ignore
+		ptr @.DSOCacheEntry.10_name, ; name: libMicrosoft.CognitiveServices.Speech.core.so
+		ptr null; void* handle
+	}, ; 20
 	%struct.DSOCacheEntry {
 		i64 u0x4cd7bd0032e920e1, ; from name: libSystem.Native
 		i64 u0xa337ccc8aef94267, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.2_name, ; name: libSystem.Native.so
 		ptr null; void* handle
-	}, ; 14
+	}, ; 21
+	%struct.DSOCacheEntry {
+		i64 u0x4fbef0a5115eaa92, ; from name: libMicrosoft.CognitiveServices.Speech.core.so
+		i64 u0x4fbef0a5115eaa92, ; uint64_t real_name_hash
+		i1 false, ; bool ignore
+		ptr @.DSOCacheEntry.10_name, ; name: libMicrosoft.CognitiveServices.Speech.core.so
+		ptr null; void* handle
+	}, ; 22
 	%struct.DSOCacheEntry {
 		i64 u0x61c4cca6c77a9014, ; from name: libmonosgen-2.0
 		i64 u0x1a1918dd01662b19, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.7_name, ; name: libmonosgen-2.0.so
 		ptr null; void* handle
-	}, ; 15
+	}, ; 23
 	%struct.DSOCacheEntry {
 		i64 u0x641102ea13f025b2, ; from name: libxamarin-debug-app-helper.so
 		i64 u0x641102ea13f025b2, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.9_name, ; name: libxamarin-debug-app-helper.so
 		ptr null; void* handle
-	}, ; 16
+	}, ; 24
+	%struct.DSOCacheEntry {
+		i64 u0x66fa1e59397720c1, ; from name: libMicrosoft.CognitiveServices.Speech.extension.audio.sys.so
+		i64 u0x66fa1e59397720c1, ; uint64_t real_name_hash
+		i1 false, ; bool ignore
+		ptr @.DSOCacheEntry.11_name, ; name: libMicrosoft.CognitiveServices.Speech.extension.audio.sys.so
+		ptr null; void* handle
+	}, ; 25
+	%struct.DSOCacheEntry {
+		i64 u0x6d4e983509096d4d, ; from name: libMicrosoft.CognitiveServices.Speech.extension.kws.ort.so
+		i64 u0x6d4e983509096d4d, ; uint64_t real_name_hash
+		i1 false, ; bool ignore
+		ptr @.DSOCacheEntry.12_name, ; name: libMicrosoft.CognitiveServices.Speech.extension.kws.ort.so
+		ptr null; void* handle
+	}, ; 26
+	%struct.DSOCacheEntry {
+		i64 u0x6f985dcb4768099c, ; from name: Microsoft.CognitiveServices.Speech.extension.lu.so
+		i64 u0xefd31b7103827d3c, ; uint64_t real_name_hash
+		i1 false, ; bool ignore
+		ptr @.DSOCacheEntry.14_name, ; name: libMicrosoft.CognitiveServices.Speech.extension.lu.so
+		ptr null; void* handle
+	}, ; 27
 	%struct.DSOCacheEntry {
 		i64 u0x6f9c86874c77b639, ; from name: libmono-component-debugger.so
 		i64 u0x6f9c86874c77b639, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.4_name, ; name: libmono-component-debugger.so
 		ptr null; void* handle
-	}, ; 17
+	}, ; 28
 	%struct.DSOCacheEntry {
 		i64 u0x74b568291c419777, ; from name: libSystem.Globalization.Native.so
 		i64 u0x74b568291c419777, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.0_name, ; name: libSystem.Globalization.Native.so
 		ptr null; void* handle
-	}, ; 18
+	}, ; 29
+	%struct.DSOCacheEntry {
+		i64 u0x7a5b9cbb7c328596, ; from name: libMicrosoft.CognitiveServices.Speech.extension.kws
+		i64 u0xef76f4b7b228ee2e, ; uint64_t real_name_hash
+		i1 false, ; bool ignore
+		ptr @.DSOCacheEntry.13_name, ; name: libMicrosoft.CognitiveServices.Speech.extension.kws.so
+		ptr null; void* handle
+	}, ; 30
 	%struct.DSOCacheEntry {
 		i64 u0x81bc2b0b52670f30, ; from name: System.Security.Cryptography.Native.Android
 		i64 u0x4818e42ca66bbd75, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.3_name, ; name: libSystem.Security.Cryptography.Native.Android.so
 		ptr null; void* handle
-	}, ; 19
+	}, ; 31
+	%struct.DSOCacheEntry {
+		i64 u0x8ce9fecf93907024, ; from name: Microsoft.CognitiveServices.Speech.extension.kws.so
+		i64 u0xef76f4b7b228ee2e, ; uint64_t real_name_hash
+		i1 false, ; bool ignore
+		ptr @.DSOCacheEntry.13_name, ; name: libMicrosoft.CognitiveServices.Speech.extension.kws.so
+		ptr null; void* handle
+	}, ; 32
 	%struct.DSOCacheEntry {
 		i64 u0x9190f4cb761b1d3c, ; from name: libSystem.IO.Compression.Native
 		i64 u0xc3cb80650fe5a0ab, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.1_name, ; name: libSystem.IO.Compression.Native.so
 		ptr null; void* handle
-	}, ; 20
+	}, ; 33
 	%struct.DSOCacheEntry {
 		i64 u0x936d971cc035eac2, ; from name: mono-component-marshal-ilgen
 		i64 u0x0582d422de762780, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.6_name, ; name: libmono-component-marshal-ilgen.so
 		ptr null; void* handle
-	}, ; 21
+	}, ; 34
+	%struct.DSOCacheEntry {
+		i64 u0x9395fa4550a66012, ; from name: Microsoft.CognitiveServices.Speech.extension.kws
+		i64 u0xef76f4b7b228ee2e, ; uint64_t real_name_hash
+		i1 false, ; bool ignore
+		ptr @.DSOCacheEntry.13_name, ; name: libMicrosoft.CognitiveServices.Speech.extension.kws.so
+		ptr null; void* handle
+	}, ; 35
 	%struct.DSOCacheEntry {
 		i64 u0x9c62065cdbdf43a5, ; from name: monosgen-2.0
 		i64 u0x1a1918dd01662b19, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.7_name, ; name: libmonosgen-2.0.so
 		ptr null; void* handle
-	}, ; 22
+	}, ; 36
 	%struct.DSOCacheEntry {
 		i64 u0x9ff54ae8a9311b68, ; from name: System.Native
 		i64 u0xa337ccc8aef94267, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.2_name, ; name: libSystem.Native.so
 		ptr null; void* handle
-	}, ; 23
+	}, ; 37
 	%struct.DSOCacheEntry {
 		i64 u0xa337ccc8aef94267, ; from name: libSystem.Native.so
 		i64 u0xa337ccc8aef94267, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.2_name, ; name: libSystem.Native.so
 		ptr null; void* handle
-	}, ; 24
+	}, ; 38
 	%struct.DSOCacheEntry {
 		i64 u0xa76ab5a3894f5a01, ; from name: System.Globalization.Native
 		i64 u0x74b568291c419777, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.0_name, ; name: libSystem.Globalization.Native.so
 		ptr null; void* handle
-	}, ; 25
+	}, ; 39
 	%struct.DSOCacheEntry {
 		i64 u0xab177aa6a32873ac, ; from name: monodroid.so
 		i64 u0x4434c7fd110c8d8b, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.8_name, ; name: libmonodroid.so
 		ptr null; void* handle
-	}, ; 26
+	}, ; 40
 	%struct.DSOCacheEntry {
 		i64 u0xb5c2ff9910024930, ; from name: libmono-component-debugger
 		i64 u0x6f9c86874c77b639, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.4_name, ; name: libmono-component-debugger.so
 		ptr null; void* handle
-	}, ; 27
+	}, ; 41
 	%struct.DSOCacheEntry {
 		i64 u0xb9c2fcad5704a3c9, ; from name: libmono-component-hot_reload.so
 		i64 u0xb9c2fcad5704a3c9, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.5_name, ; name: libmono-component-hot_reload.so
 		ptr null; void* handle
-	}, ; 28
+	}, ; 42
 	%struct.DSOCacheEntry {
 		i64 u0xb9c4d8821da5c5de, ; from name: mono-component-hot_reload.so
 		i64 u0xb9c2fcad5704a3c9, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.5_name, ; name: libmono-component-hot_reload.so
 		ptr null; void* handle
-	}, ; 29
+	}, ; 43
+	%struct.DSOCacheEntry {
+		i64 u0xc0135e4db79a8861, ; from name: Microsoft.CognitiveServices.Speech.extension.audio.sys
+		i64 u0x66fa1e59397720c1, ; uint64_t real_name_hash
+		i1 false, ; bool ignore
+		ptr @.DSOCacheEntry.11_name, ; name: libMicrosoft.CognitiveServices.Speech.extension.audio.sys.so
+		ptr null; void* handle
+	}, ; 44
 	%struct.DSOCacheEntry {
 		i64 u0xc20cd752ee7ce28d, ; from name: libxamarin-debug-app-helper
 		i64 u0x641102ea13f025b2, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.9_name, ; name: libxamarin-debug-app-helper.so
 		ptr null; void* handle
-	}, ; 30
+	}, ; 45
 	%struct.DSOCacheEntry {
 		i64 u0xc3cb80650fe5a0ab, ; from name: libSystem.IO.Compression.Native.so
 		i64 u0xc3cb80650fe5a0ab, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.1_name, ; name: libSystem.IO.Compression.Native.so
 		ptr null; void* handle
-	}, ; 31
+	}, ; 46
 	%struct.DSOCacheEntry {
 		i64 u0xc7bf0aae66d69fe4, ; from name: mono-component-debugger.so
 		i64 u0x6f9c86874c77b639, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.4_name, ; name: libmono-component-debugger.so
 		ptr null; void* handle
-	}, ; 32
+	}, ; 47
 	%struct.DSOCacheEntry {
 		i64 u0xd334d108d628ab4f, ; from name: System.IO.Compression.Native
 		i64 u0xc3cb80650fe5a0ab, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.1_name, ; name: libSystem.IO.Compression.Native.so
 		ptr null; void* handle
-	}, ; 33
+	}, ; 48
 	%struct.DSOCacheEntry {
 		i64 u0xd565cc57ed541a90, ; from name: monosgen-2.0.so
 		i64 u0x1a1918dd01662b19, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.7_name, ; name: libmonosgen-2.0.so
 		ptr null; void* handle
-	}, ; 34
+	}, ; 49
 	%struct.DSOCacheEntry {
 		i64 u0xde69d0ab38ed00d3, ; from name: mono-component-debugger
 		i64 u0x6f9c86874c77b639, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.4_name, ; name: libmono-component-debugger.so
 		ptr null; void* handle
-	}, ; 35
+	}, ; 50
 	%struct.DSOCacheEntry {
 		i64 u0xde6fb4b955d66724, ; from name: libmono-component-marshal-ilgen
 		i64 u0x0582d422de762780, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.6_name, ; name: libmono-component-marshal-ilgen.so
 		ptr null; void* handle
-	}, ; 36
+	}, ; 51
 	%struct.DSOCacheEntry {
 		i64 u0xe02ec096c271894c, ; from name: libmono-component-hot_reload
 		i64 u0xb9c2fcad5704a3c9, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.5_name, ; name: libmono-component-hot_reload.so
 		ptr null; void* handle
-	}, ; 37
+	}, ; 52
 	%struct.DSOCacheEntry {
 		i64 u0xe0d15587b4505ecd, ; from name: mono-component-marshal-ilgen.so
 		i64 u0x0582d422de762780, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.6_name, ; name: libmono-component-marshal-ilgen.so
 		ptr null; void* handle
-	}, ; 38
+	}, ; 53
+	%struct.DSOCacheEntry {
+		i64 u0xe513f78897e7f4ca, ; from name: libMicrosoft.CognitiveServices.Speech.extension.audio.sys
+		i64 u0x66fa1e59397720c1, ; uint64_t real_name_hash
+		i1 false, ; bool ignore
+		ptr @.DSOCacheEntry.11_name, ; name: libMicrosoft.CognitiveServices.Speech.extension.audio.sys.so
+		ptr null; void* handle
+	}, ; 54
+	%struct.DSOCacheEntry {
+		i64 u0xe92d09e4cf5b7f47, ; from name: Microsoft.CognitiveServices.Speech.extension.audio.sys.so
+		i64 u0x66fa1e59397720c1, ; uint64_t real_name_hash
+		i1 false, ; bool ignore
+		ptr @.DSOCacheEntry.11_name, ; name: libMicrosoft.CognitiveServices.Speech.extension.audio.sys.so
+		ptr null; void* handle
+	}, ; 55
 	%struct.DSOCacheEntry {
 		i64 u0xecb906ed9649ed1c, ; from name: System.Native.so
 		i64 u0xa337ccc8aef94267, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		ptr @.DSOCacheEntry.2_name, ; name: libSystem.Native.so
 		ptr null; void* handle
-	} ; 39
+	}, ; 56
+	%struct.DSOCacheEntry {
+		i64 u0xef76f4b7b228ee2e, ; from name: libMicrosoft.CognitiveServices.Speech.extension.kws.so
+		i64 u0xef76f4b7b228ee2e, ; uint64_t real_name_hash
+		i1 false, ; bool ignore
+		ptr @.DSOCacheEntry.13_name, ; name: libMicrosoft.CognitiveServices.Speech.extension.kws.so
+		ptr null; void* handle
+	}, ; 57
+	%struct.DSOCacheEntry {
+		i64 u0xefd31b7103827d3c, ; from name: libMicrosoft.CognitiveServices.Speech.extension.lu.so
+		i64 u0xefd31b7103827d3c, ; uint64_t real_name_hash
+		i1 false, ; bool ignore
+		ptr @.DSOCacheEntry.14_name, ; name: libMicrosoft.CognitiveServices.Speech.extension.lu.so
+		ptr null; void* handle
+	}, ; 58
+	%struct.DSOCacheEntry {
+		i64 u0xfcccedf1c673fcd8, ; from name: Microsoft.CognitiveServices.Speech.core.so
+		i64 u0x4fbef0a5115eaa92, ; uint64_t real_name_hash
+		i1 false, ; bool ignore
+		ptr @.DSOCacheEntry.10_name, ; name: libMicrosoft.CognitiveServices.Speech.core.so
+		ptr null; void* handle
+	} ; 59
 ], align 16
 
 ; AOT DSO cache entries
 @aot_dso_cache = dso_local local_unnamed_addr global [0 x %struct.DSOCacheEntry] zeroinitializer, align 8
 
-@dso_apk_entries = dso_local local_unnamed_addr global [10 x %struct.DSOApkEntry] zeroinitializer, align 16
+@dso_apk_entries = dso_local local_unnamed_addr global [15 x %struct.DSOApkEntry] zeroinitializer, align 16
 
 @_XamarinAndroidBundledAssembly_file_name_0_0 = internal dso_local global [73 x i8] zeroinitializer, align 16
 @_XamarinAndroidBundledAssembly_name_0_0 = internal dso_local global [65 x i8] zeroinitializer, align 16
@@ -1055,9 +1195,51 @@ target triple = "x86_64-unknown-linux-android21"
 @_XamarinAndroidBundledAssembly_name_13e_13e = internal dso_local global [65 x i8] zeroinitializer, align 16
 @_XamarinAndroidBundledAssembly_file_name_13f_13f = internal dso_local global [73 x i8] zeroinitializer, align 16
 @_XamarinAndroidBundledAssembly_name_13f_13f = internal dso_local global [65 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_file_name_140_140 = internal dso_local global [73 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_name_140_140 = internal dso_local global [65 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_file_name_141_141 = internal dso_local global [73 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_name_141_141 = internal dso_local global [65 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_file_name_142_142 = internal dso_local global [73 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_name_142_142 = internal dso_local global [65 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_file_name_143_143 = internal dso_local global [73 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_name_143_143 = internal dso_local global [65 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_file_name_144_144 = internal dso_local global [73 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_name_144_144 = internal dso_local global [65 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_file_name_145_145 = internal dso_local global [73 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_name_145_145 = internal dso_local global [65 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_file_name_146_146 = internal dso_local global [73 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_name_146_146 = internal dso_local global [65 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_file_name_147_147 = internal dso_local global [73 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_name_147_147 = internal dso_local global [65 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_file_name_148_148 = internal dso_local global [73 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_name_148_148 = internal dso_local global [65 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_file_name_149_149 = internal dso_local global [73 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_name_149_149 = internal dso_local global [65 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_file_name_14a_14a = internal dso_local global [73 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_name_14a_14a = internal dso_local global [65 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_file_name_14b_14b = internal dso_local global [73 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_name_14b_14b = internal dso_local global [65 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_file_name_14c_14c = internal dso_local global [73 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_name_14c_14c = internal dso_local global [65 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_file_name_14d_14d = internal dso_local global [73 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_name_14d_14d = internal dso_local global [65 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_file_name_14e_14e = internal dso_local global [73 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_name_14e_14e = internal dso_local global [65 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_file_name_14f_14f = internal dso_local global [73 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_name_14f_14f = internal dso_local global [65 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_file_name_150_150 = internal dso_local global [73 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_name_150_150 = internal dso_local global [65 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_file_name_151_151 = internal dso_local global [73 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_name_151_151 = internal dso_local global [65 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_file_name_152_152 = internal dso_local global [73 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_name_152_152 = internal dso_local global [65 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_file_name_153_153 = internal dso_local global [73 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_name_153_153 = internal dso_local global [65 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_file_name_154_154 = internal dso_local global [73 x i8] zeroinitializer, align 16
+@_XamarinAndroidBundledAssembly_name_154_154 = internal dso_local global [65 x i8] zeroinitializer, align 16
 
 ; Bundled assembly name buffers, all 65 bytes long
-@bundled_assemblies = dso_local local_unnamed_addr global [320 x %struct.XamarinAndroidBundledAssembly] [
+@bundled_assemblies = dso_local local_unnamed_addr global [341 x %struct.XamarinAndroidBundledAssembly] [
 	%struct.XamarinAndroidBundledAssembly {
 		i32 -1, ; int32_t file_fd
 		ptr @_XamarinAndroidBundledAssembly_file_name_0_0, ; char* file_name
@@ -3937,7 +4119,196 @@ target triple = "x86_64-unknown-linux-android21"
 		ptr null, ; uint8_t* data
 		i32 65, ; uint32_t name_length
 		ptr @_XamarinAndroidBundledAssembly_name_13f_13f; char* name
-	} ; 319
+	}, ; 319
+	%struct.XamarinAndroidBundledAssembly {
+		i32 -1, ; int32_t file_fd
+		ptr @_XamarinAndroidBundledAssembly_file_name_140_140, ; char* file_name
+		i32 0, ; uint32_t data_offset
+		i32 0, ; uint32_t data_size
+		ptr null, ; uint8_t* data
+		i32 65, ; uint32_t name_length
+		ptr @_XamarinAndroidBundledAssembly_name_140_140; char* name
+	}, ; 320
+	%struct.XamarinAndroidBundledAssembly {
+		i32 -1, ; int32_t file_fd
+		ptr @_XamarinAndroidBundledAssembly_file_name_141_141, ; char* file_name
+		i32 0, ; uint32_t data_offset
+		i32 0, ; uint32_t data_size
+		ptr null, ; uint8_t* data
+		i32 65, ; uint32_t name_length
+		ptr @_XamarinAndroidBundledAssembly_name_141_141; char* name
+	}, ; 321
+	%struct.XamarinAndroidBundledAssembly {
+		i32 -1, ; int32_t file_fd
+		ptr @_XamarinAndroidBundledAssembly_file_name_142_142, ; char* file_name
+		i32 0, ; uint32_t data_offset
+		i32 0, ; uint32_t data_size
+		ptr null, ; uint8_t* data
+		i32 65, ; uint32_t name_length
+		ptr @_XamarinAndroidBundledAssembly_name_142_142; char* name
+	}, ; 322
+	%struct.XamarinAndroidBundledAssembly {
+		i32 -1, ; int32_t file_fd
+		ptr @_XamarinAndroidBundledAssembly_file_name_143_143, ; char* file_name
+		i32 0, ; uint32_t data_offset
+		i32 0, ; uint32_t data_size
+		ptr null, ; uint8_t* data
+		i32 65, ; uint32_t name_length
+		ptr @_XamarinAndroidBundledAssembly_name_143_143; char* name
+	}, ; 323
+	%struct.XamarinAndroidBundledAssembly {
+		i32 -1, ; int32_t file_fd
+		ptr @_XamarinAndroidBundledAssembly_file_name_144_144, ; char* file_name
+		i32 0, ; uint32_t data_offset
+		i32 0, ; uint32_t data_size
+		ptr null, ; uint8_t* data
+		i32 65, ; uint32_t name_length
+		ptr @_XamarinAndroidBundledAssembly_name_144_144; char* name
+	}, ; 324
+	%struct.XamarinAndroidBundledAssembly {
+		i32 -1, ; int32_t file_fd
+		ptr @_XamarinAndroidBundledAssembly_file_name_145_145, ; char* file_name
+		i32 0, ; uint32_t data_offset
+		i32 0, ; uint32_t data_size
+		ptr null, ; uint8_t* data
+		i32 65, ; uint32_t name_length
+		ptr @_XamarinAndroidBundledAssembly_name_145_145; char* name
+	}, ; 325
+	%struct.XamarinAndroidBundledAssembly {
+		i32 -1, ; int32_t file_fd
+		ptr @_XamarinAndroidBundledAssembly_file_name_146_146, ; char* file_name
+		i32 0, ; uint32_t data_offset
+		i32 0, ; uint32_t data_size
+		ptr null, ; uint8_t* data
+		i32 65, ; uint32_t name_length
+		ptr @_XamarinAndroidBundledAssembly_name_146_146; char* name
+	}, ; 326
+	%struct.XamarinAndroidBundledAssembly {
+		i32 -1, ; int32_t file_fd
+		ptr @_XamarinAndroidBundledAssembly_file_name_147_147, ; char* file_name
+		i32 0, ; uint32_t data_offset
+		i32 0, ; uint32_t data_size
+		ptr null, ; uint8_t* data
+		i32 65, ; uint32_t name_length
+		ptr @_XamarinAndroidBundledAssembly_name_147_147; char* name
+	}, ; 327
+	%struct.XamarinAndroidBundledAssembly {
+		i32 -1, ; int32_t file_fd
+		ptr @_XamarinAndroidBundledAssembly_file_name_148_148, ; char* file_name
+		i32 0, ; uint32_t data_offset
+		i32 0, ; uint32_t data_size
+		ptr null, ; uint8_t* data
+		i32 65, ; uint32_t name_length
+		ptr @_XamarinAndroidBundledAssembly_name_148_148; char* name
+	}, ; 328
+	%struct.XamarinAndroidBundledAssembly {
+		i32 -1, ; int32_t file_fd
+		ptr @_XamarinAndroidBundledAssembly_file_name_149_149, ; char* file_name
+		i32 0, ; uint32_t data_offset
+		i32 0, ; uint32_t data_size
+		ptr null, ; uint8_t* data
+		i32 65, ; uint32_t name_length
+		ptr @_XamarinAndroidBundledAssembly_name_149_149; char* name
+	}, ; 329
+	%struct.XamarinAndroidBundledAssembly {
+		i32 -1, ; int32_t file_fd
+		ptr @_XamarinAndroidBundledAssembly_file_name_14a_14a, ; char* file_name
+		i32 0, ; uint32_t data_offset
+		i32 0, ; uint32_t data_size
+		ptr null, ; uint8_t* data
+		i32 65, ; uint32_t name_length
+		ptr @_XamarinAndroidBundledAssembly_name_14a_14a; char* name
+	}, ; 330
+	%struct.XamarinAndroidBundledAssembly {
+		i32 -1, ; int32_t file_fd
+		ptr @_XamarinAndroidBundledAssembly_file_name_14b_14b, ; char* file_name
+		i32 0, ; uint32_t data_offset
+		i32 0, ; uint32_t data_size
+		ptr null, ; uint8_t* data
+		i32 65, ; uint32_t name_length
+		ptr @_XamarinAndroidBundledAssembly_name_14b_14b; char* name
+	}, ; 331
+	%struct.XamarinAndroidBundledAssembly {
+		i32 -1, ; int32_t file_fd
+		ptr @_XamarinAndroidBundledAssembly_file_name_14c_14c, ; char* file_name
+		i32 0, ; uint32_t data_offset
+		i32 0, ; uint32_t data_size
+		ptr null, ; uint8_t* data
+		i32 65, ; uint32_t name_length
+		ptr @_XamarinAndroidBundledAssembly_name_14c_14c; char* name
+	}, ; 332
+	%struct.XamarinAndroidBundledAssembly {
+		i32 -1, ; int32_t file_fd
+		ptr @_XamarinAndroidBundledAssembly_file_name_14d_14d, ; char* file_name
+		i32 0, ; uint32_t data_offset
+		i32 0, ; uint32_t data_size
+		ptr null, ; uint8_t* data
+		i32 65, ; uint32_t name_length
+		ptr @_XamarinAndroidBundledAssembly_name_14d_14d; char* name
+	}, ; 333
+	%struct.XamarinAndroidBundledAssembly {
+		i32 -1, ; int32_t file_fd
+		ptr @_XamarinAndroidBundledAssembly_file_name_14e_14e, ; char* file_name
+		i32 0, ; uint32_t data_offset
+		i32 0, ; uint32_t data_size
+		ptr null, ; uint8_t* data
+		i32 65, ; uint32_t name_length
+		ptr @_XamarinAndroidBundledAssembly_name_14e_14e; char* name
+	}, ; 334
+	%struct.XamarinAndroidBundledAssembly {
+		i32 -1, ; int32_t file_fd
+		ptr @_XamarinAndroidBundledAssembly_file_name_14f_14f, ; char* file_name
+		i32 0, ; uint32_t data_offset
+		i32 0, ; uint32_t data_size
+		ptr null, ; uint8_t* data
+		i32 65, ; uint32_t name_length
+		ptr @_XamarinAndroidBundledAssembly_name_14f_14f; char* name
+	}, ; 335
+	%struct.XamarinAndroidBundledAssembly {
+		i32 -1, ; int32_t file_fd
+		ptr @_XamarinAndroidBundledAssembly_file_name_150_150, ; char* file_name
+		i32 0, ; uint32_t data_offset
+		i32 0, ; uint32_t data_size
+		ptr null, ; uint8_t* data
+		i32 65, ; uint32_t name_length
+		ptr @_XamarinAndroidBundledAssembly_name_150_150; char* name
+	}, ; 336
+	%struct.XamarinAndroidBundledAssembly {
+		i32 -1, ; int32_t file_fd
+		ptr @_XamarinAndroidBundledAssembly_file_name_151_151, ; char* file_name
+		i32 0, ; uint32_t data_offset
+		i32 0, ; uint32_t data_size
+		ptr null, ; uint8_t* data
+		i32 65, ; uint32_t name_length
+		ptr @_XamarinAndroidBundledAssembly_name_151_151; char* name
+	}, ; 337
+	%struct.XamarinAndroidBundledAssembly {
+		i32 -1, ; int32_t file_fd
+		ptr @_XamarinAndroidBundledAssembly_file_name_152_152, ; char* file_name
+		i32 0, ; uint32_t data_offset
+		i32 0, ; uint32_t data_size
+		ptr null, ; uint8_t* data
+		i32 65, ; uint32_t name_length
+		ptr @_XamarinAndroidBundledAssembly_name_152_152; char* name
+	}, ; 338
+	%struct.XamarinAndroidBundledAssembly {
+		i32 -1, ; int32_t file_fd
+		ptr @_XamarinAndroidBundledAssembly_file_name_153_153, ; char* file_name
+		i32 0, ; uint32_t data_offset
+		i32 0, ; uint32_t data_size
+		ptr null, ; uint8_t* data
+		i32 65, ; uint32_t name_length
+		ptr @_XamarinAndroidBundledAssembly_name_153_153; char* name
+	}, ; 339
+	%struct.XamarinAndroidBundledAssembly {
+		i32 -1, ; int32_t file_fd
+		ptr @_XamarinAndroidBundledAssembly_file_name_154_154, ; char* file_name
+		i32 0, ; uint32_t data_offset
+		i32 0, ; uint32_t data_size
+		ptr null, ; uint8_t* data
+		i32 65, ; uint32_t name_length
+		ptr @_XamarinAndroidBundledAssembly_name_154_154; char* name
+	} ; 340
 ], align 16
 
 @assembly_store_bundled_assemblies = dso_local local_unnamed_addr global [0 x %struct.AssemblyStoreSingleAssemblyRuntimeData] zeroinitializer, align 8
@@ -3974,6 +4345,11 @@ target triple = "x86_64-unknown-linux-android21"
 @.DSOCacheEntry.7_name = private unnamed_addr constant [19 x i8] c"libmonosgen-2.0.so\00", align 16
 @.DSOCacheEntry.8_name = private unnamed_addr constant [16 x i8] c"libmonodroid.so\00", align 16
 @.DSOCacheEntry.9_name = private unnamed_addr constant [31 x i8] c"libxamarin-debug-app-helper.so\00", align 16
+@.DSOCacheEntry.10_name = private unnamed_addr constant [46 x i8] c"libMicrosoft.CognitiveServices.Speech.core.so\00", align 16
+@.DSOCacheEntry.11_name = private unnamed_addr constant [61 x i8] c"libMicrosoft.CognitiveServices.Speech.extension.audio.sys.so\00", align 16
+@.DSOCacheEntry.12_name = private unnamed_addr constant [59 x i8] c"libMicrosoft.CognitiveServices.Speech.extension.kws.ort.so\00", align 16
+@.DSOCacheEntry.13_name = private unnamed_addr constant [55 x i8] c"libMicrosoft.CognitiveServices.Speech.extension.kws.so\00", align 16
+@.DSOCacheEntry.14_name = private unnamed_addr constant [54 x i8] c"libMicrosoft.CognitiveServices.Speech.extension.lu.so\00", align 16
 
 ; Metadata
 !llvm.module.flags = !{!0, !1}

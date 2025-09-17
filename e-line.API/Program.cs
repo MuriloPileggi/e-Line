@@ -33,8 +33,11 @@ builder.Services.AddCors(options =>
 // Register Optimizer for dependency injection
 builder.Services.AddSingleton<EvOptimizer>();
 
-// Registor OpenChargeMapService with a dedicated HttpClient
+// Register OpenChargeMapService with a dedicated HttpClient
 builder.Services.AddHttpClient<OpenChargeMapService>();
+
+// Register Text To Speech Service
+builder.Services.AddSingleton<TextToSpeechService>();
 
 var app = builder.Build();
 
@@ -107,6 +110,37 @@ app.MapPost("/api/route/plan", async (RoutePlanRequest request, MapsRoutingClien
     return Results.Ok(response);
 });
 
+// Azure voice recognition endpoint
+app.MapPost("/api/voice/intent", async (VoiceIntentRequest request, TextToSpeechService ttsService) =>
+{
+    string responseText = "Desculpe, não entendi o comando.";
+
+    // Simple Intent recognition, for now we just check for keywords
+    var normalizedText = request.Text.ToLowerInvariant();
+    if (normalizedText.Contains("qual") && normalizedText.Contains("chegada"))
+    {
+        // If the intent is matched create a dynamic response
+        var arrivalTime = DateTime.Now.AddMinutes(45);
+        responseText = $"Sua chegada está prevista para às {arrivalTime::HH::mm}.";
+    }
+
+    // Text to speech call
+    var audioData = await ttsService.SynthesizeSpeechAsync(responseText);
+
+    if (audioData is not null)
+    {
+        // Return audio data as mp3 file
+        return Results.File(audioData, "audio/mpeg", "response.mp3");
+    }
+
+    return Results.Problem("Failed to synthesize speech");
+});
+
+
 #endregion
 
+
 app.Run();
+
+// Define simple record for Voice intent request
+public record VoiceIntentRequest(string Text);
