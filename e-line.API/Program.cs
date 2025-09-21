@@ -39,6 +39,18 @@ builder.Services.AddHttpClient<OpenChargeMapService>();
 // Register Text To Speech Service
 builder.Services.AddSingleton<TextToSpeechService>();
 
+#if DEBUG
+var handler = new HttpClientHandler {
+    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+};
+// Register our ElevationService, telling it to use our custom, insecure handler
+builder.Services.AddHttpClient<ElevationService>()
+    .ConfigurePrimaryHttpMessageHandler(() => handler);
+#else
+// When built in "Release" mode for production, this standard, secure version will be used.
+builder.Services.AddHttpClient<ElevationService>();
+#endif
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline
@@ -56,28 +68,46 @@ app.UseHttpsRedirection();
 app.MapGet("/api/test", () => new { Message = "Hello from local API!" });
 
 // Azure maps route planning endpoint
-app.MapPost("/api/route/plan", async (RoutePlanRequest request, MapsRoutingClient client, EvOptimizer optimizer, OpenChargeMapService ocmService) =>
+app.MapPost("/api/route/plan", async (RoutePlanRequest request,
+                                      MapsRoutingClient client,
+                                      ElevationService elevationService,
+                                      OpenChargeMapService ocmService,
+                                      EvOptimizer optimizer) =>
 {
     // Get selected EV Model
     var evModel = EVDatabase.GetModelById(request.EvModelId);
-    if (evModel is null)
-    {
-        return Results.BadRequest("Invalid EV Model");
-    }
-    
-    // Define the route points from the incoming request
-    var routePoints = new List<GeoPosition>
+    if (evModel is null) return Results.BadRequest("Invalid EV Model");
+
+    // Get route from Azure Maps
+    var routeQuery = new RouteDirectionQuery(new List<GeoPosition>
     {
         new GeoPosition(request.Origin.Longitude, request.Origin.Latitude),
         new GeoPosition(request.Destination.Longitude, request.Destination.Latitude)
-    };
+    }, new RouteDirectionOptions
+    {
+        // Use current time to get a route based on live traffic
+        DepartAt = DateTimeOffset.UtcNow,
+        // Ensure the travel time calculation includes traffic delays
+        TravelTimeType = TravelTimeType.All,
+        // Specify that we want the fastest route considering current conditions
+        RouteType = RouteType.Fastest
+    });
 
     // Call the Azure Maps Directions API
-    var directionsResult = await client.GetDirectionsAsync(new RouteDirectionQuery(routePoints));
+    var directionsResult = await client.GetDirectionsAsync(routeQuery);
 
     // Extract the coordinates from the first leg of the first route
     var routeLeg = directionsResult.Value.Routes.First().Legs.First();
     var pointCoordinates = routeLeg.Points;
+
+    // Get elevation data from the Open-Elevation API
+    var elevations = await elevationService.GetElevationForRouteAsync(pointCoordinates);
+
+    // Ensure we got elevation data for every point
+    if (elevations.Count != pointCoordinates.Count)
+    {
+        return Results.Problem("Failed to retreive elevation data for the route");
+    }
 
     // Convert the coordinates into the simple [[lat, lon], ...] format our JS expects 
     var polylineForJS = pointCoordinates.Select(p => new[] { p.Latitude, p.Longitude }).ToList();
@@ -87,7 +117,7 @@ app.MapPost("/api/route/plan", async (RoutePlanRequest request, MapsRoutingClien
     // Use optimizer to calculate charging stops
     var requiredStops = new List<ChargingStation>();
     var routeDistanceMeters = routeLeg.Summary.LengthInMeters;
-    var stopRequired = optimizer.IsStopRequired(routeDistanceMeters, evModel, request.StartSoC);
+    var stopRequired = optimizer.IsStopRequired(pointCoordinates, elevations, evModel, request.StartSoC);
 
     if (stopRequired)
     {
@@ -134,6 +164,45 @@ app.MapPost("/api/voice/intent", async (VoiceIntentRequest request, TextToSpeech
     }
 
     return Results.Problem("Failed to synthesize speech");
+});
+
+// Endpoint for generating speech tokens
+app.MapGet("/api/auth/speech-token", async (IConfiguration config) =>
+{
+    var speechKey = config["AzureSpeech:SubscriptionKey"];
+    var speechRegion = config["AzureSpeech:Region"];
+    if (string.IsNullOrEmpty(speechKey) || string.IsNullOrEmpty(speechRegion))
+    {
+        return Results.Problem("Speech service not configured");
+    }
+
+    string tokenEndpoint = $"https://{speechRegion}.api.cognitive.microsoft.com/sts/v1.0/issueToken";
+
+    using var client = new HttpClient();
+    client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", speechKey);
+
+    var response = await client.PostAsync(tokenEndpoint, null);
+    if (response.IsSuccessStatusCode)
+    {
+        var token = await response.Content.ReadAsStringAsync();
+        return Results.Ok(new { Token = token, Region = speechRegion });
+    }
+
+    return Results.Problem("Failed to get speech token from Azure");
+});
+
+// Endpoint for generating maps tokens
+app.MapGet("/api/config/maps-key", (IConfiguration config) =>
+{
+    var mapsKey = config["AzureMaps:SubscriptionKey"];
+
+    if (string.IsNullOrEmpty(mapsKey))
+    {
+        // Return an explicit error so the mobile app knows what's wrong
+        return Results.Problem("Azure Maps key is not configured on the server.");
+    }
+    
+    return Results.Ok(new { Key = mapsKey });
 });
 
 

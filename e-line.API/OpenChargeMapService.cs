@@ -10,7 +10,7 @@ public class OpenChargeMapService
     public OpenChargeMapService(HttpClient httpClient, IConfiguration configuration)
     {
         _httpClient = httpClient;
-        _apiKey = configuration["OpenChargeMap:SubscriptionKey"] ?? throw new InvalidOperationException("OCM API Key not configured.");
+        _apiKey = configuration["OpenChargeMap:ApiKey"] ?? throw new InvalidOperationException("OCM API Key not configured.");
         _httpClient.BaseAddress = new Uri("https://api.openchargemap.io/v3");
     }
 

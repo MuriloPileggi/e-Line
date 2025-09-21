@@ -7,7 +7,8 @@
         <toolkit:MediaElement x:Name="AudioPlayer"
                               IsVisible="False"/>
 
-        <WebView x:Name="mapWebView" />
+        <WebView x:Name="mapWebView"
+                 Navigated="OnMapWebViewNavigated" />
 
         <Button x:Name="PlanRouteButton"
                 Text="Plan Mock Route"

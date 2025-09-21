@@ -11,6 +11,9 @@ public partial class MapPage : ContentPage
     private HttpClient _httpClient;
     private readonly VoiceService _voiceService;
 
+    // Flag to make sure we initialize only once
+    private bool _isInitialized = false;
+
     public MapPage()
     {
         InitializeComponent();
@@ -26,6 +29,40 @@ public partial class MapPage : ContentPage
         _httpClient = new HttpClient();
         const string apiPort = "5148";
         _httpClient.BaseAddress = new Uri($"http://10.0.2.2:{apiPort}"); // Emulator
+
+        // Subscribe to the Unloaded event for cleanup (Force close media player)
+        Unloaded += OnMapPageUnloaded;
+    }
+
+    // Wait for webview to be loaded before initializing services
+    private async void OnMapWebViewNavigated(object? sender, WebNavigatedEventArgs e)
+    {
+        if (_isInitialized) return;
+        _isInitialized = true; // Set flag to prevent running more than once
+
+        try
+        {
+            // Fetch the maps key
+            var response = await _httpClient.GetFromJsonAsync<MapsKeyResponse>("/api/config/maps-key");
+
+            if (response?.Key is not null)
+            {
+                // Initialize the map with the key
+                await mapWebView.EvaluateJavaScriptAsync($"initializeMap('{response.Key}')");
+            }
+            else
+            {
+                await DisplayAlert("Map Error", "Did not receive a valid maps key", "OK");
+            }
+
+            // Initialize voice service
+            await _voiceService.InitializeAsync(_httpClient);
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", $"Failed to initialize services: {ex.Message}", "OK");
+        }
+
     }
 
     private async void OnPlanRouteClicked(object sender, EventArgs e)
@@ -37,7 +74,7 @@ public partial class MapPage : ContentPage
                 new M_GeoPoint(-23.4356, -46.4778),
                 new M_GeoPoint(-23.573964069279068, -46.62321774553537),
                 EvModelId: 2, // BYD Dolphin
-                StartSoC: 0.95
+                StartSoC: 0.50
             );
 
             // Call our mock API endpoint
@@ -204,6 +241,14 @@ public partial class MapPage : ContentPage
         await DisplayAlert("Permission Denied", "A permissão do microfone é necessária para usar o assistente de voz.", "OK");
         return false;
     }
+
+    private void OnMapPageUnloaded(object? sender, EventArgs e)
+    {
+        // Stop playback and release the native resources used by the media element
+        AudioPlayer.Stop();
+        AudioPlayer.Handler?.DisconnectHandler();
+    }
+
 }
 
 // --- Data Contracts ---
@@ -214,3 +259,4 @@ public record RoutePlanResponse(string Polyline, List<ChargingStation> Stops, do
 public record ChargingStation(string Name, M_GeoPoint Location, int PowerKw);
 public record M_GeoPoint(double Latitude, double Longitude);
 public record VoiceIntentRequest(string Text);
+public record MapsKeyResponse(string Key);

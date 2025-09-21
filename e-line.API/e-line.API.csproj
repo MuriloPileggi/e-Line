@@ -1,10 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>e_line.API</RootNamespace>
+    <UserSecretsId>1c0a90a2-5307-470a-9bd2-e4f55bc27584</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

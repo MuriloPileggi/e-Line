@@ -23,8 +23,6 @@
     <div id="myMap"></div>
     <script type="text/javascript">
         // --- Configuration ---
-        const subscriptionKey = ''; 
-
         // Coordinates for São Paulo, Brazil
         const saoPauloCenter = [-46.6333, -23.5505]; 
 
@@ -33,7 +31,7 @@
         let pinsLayer;
 
         // --- Map Initialization ---
-        function initializeMap() {
+        function initializeMap(subscriptionKey) {
             map = new atlas.Map('myMap', {
                 center: saoPauloCenter,
                 zoom: 12,
@@ -102,7 +100,7 @@
         }
 
         // Wait for the DOM to be ready before initializing the map
-        document.addEventListener('DOMContentLoaded', initializeMap);
+        //document.addEventListener('DOMContentLoaded', initializeMap);
     </script>
 </body>
 </html>
