@@ -1,5 +1,5 @@
-using System.Net.Http.Json;
 using System.Text.Json;
+using System.Net.Http.Json;
 using System.Text.Json.Nodes;
 using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Maui.Extensions;
@@ -26,9 +26,14 @@ public partial class MapPage : ContentPage
         mapWebView.Source = new UrlWebViewSource { Url = "map.html" };
 
         // Use HTTP for local development against the API
-        _httpClient = new HttpClient();
-        const string apiPort = "5148";
-        _httpClient.BaseAddress = new Uri($"http://10.0.2.2:{apiPort}"); // Emulator
+        //_httpClient = new HttpClient();
+        //const string apiPort = "5148";
+        //_httpClient.BaseAddress = new Uri($"http://10.0.2.2:{apiPort}"); // Emulator
+
+        _httpClient = new HttpClient
+        {
+            BaseAddress = new Uri("https://e-line-ase2dnd5haacbnhj.eastus-01.azurewebsites.net")
+        };
 
         // Subscribe to the Unloaded event for cleanup (Force close media player)
         Unloaded += OnMapPageUnloaded;
@@ -74,7 +79,7 @@ public partial class MapPage : ContentPage
                 new M_GeoPoint(-23.4356, -46.4778),
                 new M_GeoPoint(-23.573964069279068, -46.62321774553537),
                 EvModelId: 2, // BYD Dolphin
-                StartSoC: 0.50
+                StartSoC: 0.20
             );
 
             // Call our mock API endpoint

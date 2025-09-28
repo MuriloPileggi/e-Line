@@ -18,10 +18,8 @@ public partial class SettingsPage : ContentPage
 
         _httpClient = new HttpClient(handler);
 
-        const string apiPort = "5148";
-
         // Use 10.0.2.2 to connect from the android emulator to host machine
-        _httpClient.BaseAddress = new Uri($"http://10.0.2.2:{apiPort}");
+        _httpClient.BaseAddress = new Uri("https://e-line-ase2dnd5haacbnhj.eastus-01.azurewebsites.net");
     }
 
     protected override async void OnAppearing()

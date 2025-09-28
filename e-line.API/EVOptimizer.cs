@@ -9,7 +9,6 @@ public class EvOptimizer
     // Method that determines whether or not to add charging stops in route
     public bool IsStopRequired(
         IReadOnlyList<GeoPosition> routePoints,
-        List<double> elevations,
         EVModel ev,
         double startSoC)
     {
@@ -20,10 +19,7 @@ public class EvOptimizer
             var startPoint = routePoints[i];
             var endPoint = routePoints[i + 1];
 
-            var startElevation = elevations[i];
-            var endElevation = elevations[i + 1];
-
-            var energyUsedKwh = CalculateSegmentEnergy(startPoint, endPoint, startElevation, endElevation, ev);
+            var energyUsedKwh = CalculateSegmentEnergy(startPoint, endPoint, ev);
 
             currentSoC -= energyUsedKwh / ev.UsableBatteryKwh;
 
@@ -40,12 +36,9 @@ public class EvOptimizer
     private double CalculateSegmentEnergy(
         GeoPosition start,
         GeoPosition end,
-        double startElevation,
-        double endElevation,
         EVModel ev)
     {
         var distanceKm = Haversine.GetDistance(start, end);
-        var elevationChangeM = endElevation - startElevation;
 
         // Energy for distance (flat ground)
         var flatEnergy = distanceKm * ev.KwhPerKm;
@@ -56,14 +49,8 @@ public class EvOptimizer
         double vehicleMassKg = 2000;
         double gravity = 9.81;
         double efficiencyFactor = 0.75;
-        var potentialEnergyJoules = vehicleMassKg * gravity * elevationChangeM;
+        var potentialEnergyJoules = vehicleMassKg * gravity;
         var potentialEnergyKwh = potentialEnergyJoules / (3.6e6 * efficiencyFactor);
-
-        // If we are going downhill, regenerative braking recorver some energy
-        if (potentialEnergyKwh < 0)
-        {
-            potentialEnergyKwh *= 0.6; // Assume 60% regen efficiency
-        }
 
         return flatEnergy + potentialEnergyKwh;
     }

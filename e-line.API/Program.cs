@@ -39,18 +39,6 @@ builder.Services.AddHttpClient<OpenChargeMapService>();
 // Register Text To Speech Service
 builder.Services.AddSingleton<TextToSpeechService>();
 
-#if DEBUG
-var handler = new HttpClientHandler {
-    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-};
-// Register our ElevationService, telling it to use our custom, insecure handler
-builder.Services.AddHttpClient<ElevationService>()
-    .ConfigurePrimaryHttpMessageHandler(() => handler);
-#else
-// When built in "Release" mode for production, this standard, secure version will be used.
-builder.Services.AddHttpClient<ElevationService>();
-#endif
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline
@@ -70,7 +58,6 @@ app.MapGet("/api/test", () => new { Message = "Hello from local API!" });
 // Azure maps route planning endpoint
 app.MapPost("/api/route/plan", async (RoutePlanRequest request,
                                       MapsRoutingClient client,
-                                      ElevationService elevationService,
                                       OpenChargeMapService ocmService,
                                       EvOptimizer optimizer) =>
 {
@@ -100,15 +87,6 @@ app.MapPost("/api/route/plan", async (RoutePlanRequest request,
     var routeLeg = directionsResult.Value.Routes.First().Legs.First();
     var pointCoordinates = routeLeg.Points;
 
-    // Get elevation data from the Open-Elevation API
-    var elevations = await elevationService.GetElevationForRouteAsync(pointCoordinates);
-
-    // Ensure we got elevation data for every point
-    if (elevations.Count != pointCoordinates.Count)
-    {
-        return Results.Problem("Failed to retreive elevation data for the route");
-    }
-
     // Convert the coordinates into the simple [[lat, lon], ...] format our JS expects 
     var polylineForJS = pointCoordinates.Select(p => new[] { p.Latitude, p.Longitude }).ToList();
     // Serialize it into JSON string format (nested array)
@@ -117,7 +95,7 @@ app.MapPost("/api/route/plan", async (RoutePlanRequest request,
     // Use optimizer to calculate charging stops
     var requiredStops = new List<ChargingStation>();
     var routeDistanceMeters = routeLeg.Summary.LengthInMeters;
-    var stopRequired = optimizer.IsStopRequired(pointCoordinates, elevations, evModel, request.StartSoC);
+    var stopRequired = optimizer.IsStopRequired(pointCoordinates, evModel, request.StartSoC);
 
     if (stopRequired)
     {
@@ -152,6 +130,10 @@ app.MapPost("/api/voice/intent", async (VoiceIntentRequest request, TextToSpeech
         // If the intent is matched create a dynamic response
         var arrivalTime = DateTime.Now.AddMinutes(45);
         responseText = $"Sua chegada está prevista para às {arrivalTime::HH::mm}.";
+    }
+    else if (normalizedText.Contains("confirme") && normalizedText.Contains("viagem"))
+    {
+        responseText = "Sua viagem está confirmada, com origem Aeroporto de Guarulhos e destino FIAP";
     }
 
     // Text to speech call

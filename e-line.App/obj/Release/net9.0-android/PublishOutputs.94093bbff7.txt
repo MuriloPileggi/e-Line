@@ -1,0 +1,4 @@
+/home/mdm/Documents/e-Line/e-line.App/bin/Release/net9.0-android/publish/com.companyname.eline.app-Signed.aab
+/home/mdm/Documents/e-Line/e-line.App/bin/Release/net9.0-android/publish/com.companyname.eline.app.aab
+/home/mdm/Documents/e-Line/e-line.App/bin/Release/net9.0-android/publish/com.companyname.eline.app-Signed.apk
+/home/mdm/Documents/e-Line/e-line.App/bin/Release/net9.0-android/publish/_Microsoft.Android.Resource.Designer.dll
