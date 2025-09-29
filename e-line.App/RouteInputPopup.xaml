@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="e_line.App.RouteInputPopup"
+               x:TypeArguments="local:RouteInputResult"
+               xmlns:local="clr-namespace:e_line.App"
+               x:DataType="local:RouteInputResult">
+    <Border StrokeShape="RoundRectangle 12" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=White, Dark=#1C1C1E}" Padding="20">
+        <VerticalStackLayout Spacing="15" WidthRequest="300">
+            <Label Text="Planejar nova rota" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Entry Placeholder="Endereço de origem" Text="{Binding OriginAddress}" />
+            <Entry Placeholder="Endereço de destino" Text="{Binding DestinationAddress}" />
+
+            <Label Text="{Binding StartSoC, StringFormat='Bateria Atual: {0:F0}%'}" />
+            <Slider x:Name="SocSlider" Minimum="0" Maximum="100" Value="{Binding StartSoC}" />
+
+            <Button Text="Planejar Rota" Clicked="OnFindRouteClicked" Margin="0,10,0,0" />
+        </VerticalStackLayout>
+    </Border>
+</toolkit:Popup>

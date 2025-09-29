@@ -47,13 +47,31 @@ public partial class MapPage : ContentPage
 
         try
         {
+            // Check and request location permission
+            var locPermissionStatus = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+            if (locPermissionStatus != PermissionStatus.Granted)
+            {
+                locPermissionStatus = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+            }
+
+            // Get current location
+            var location = await Geolocation.Default.GetLocationAsync(new GeolocationRequest
+            {
+                DesiredAccuracy = GeolocationAccuracy.Medium,
+                Timeout = TimeSpan.FromSeconds(30)
+            });
+
+            // Set starting coordinates, if null set to default (Sao Paulo center)
+            var startLat = location?.Latitude ?? -23.5505;
+            var startLon = location?.Longitude ?? -46.6333;
+
             // Fetch the maps key
             var response = await _httpClient.GetFromJsonAsync<MapsKeyResponse>("/api/config/maps-key");
 
             if (response?.Key is not null)
             {
                 // Initialize the map with the key
-                await mapWebView.EvaluateJavaScriptAsync($"initializeMap('{response.Key}')");
+                await mapWebView.EvaluateJavaScriptAsync($"initializeMap('{response.Key}', {startLat}, {startLon})");
             }
             else
             {
@@ -70,9 +88,113 @@ public partial class MapPage : ContentPage
 
     }
 
-    private async void OnPlanRouteClicked(object sender, EventArgs e)
+    private async void OnPlanNewRouteClicked(object sender, EventArgs e)
     {
+        var inputPopup = new RouteInputPopup();
+        var userInput = await this.ShowPopupAsync(inputPopup);
+
+        RouteInputResult? routeInput = null;
+
+        if (userInput is not null)
+        {
+            var resultProperty = userInput.GetType().GetProperty("Result");
+            if (resultProperty is not null)
+            {
+                routeInput = resultProperty.GetValue(userInput) as RouteInputResult;
+            }
+        }
+
+        // Check if we successfully got the route input data
+        if (routeInput is null)
+        {
+            // User canceled or no data from popup received
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(routeInput.OriginAddress) || string.IsNullOrWhiteSpace(routeInput.DestinationAddress))
+        {
+            await DisplayAlert("Error", "Por favor, preencha os endereços de origem e destino", "OK");
+            return;
+        }
+
         try
+        {
+            // Geocode both addresses
+            var originResponse = await _httpClient.PostAsJsonAsync("/api/geocode", new GeocodeRequest(routeInput.OriginAddress));
+            var destResponse = await _httpClient.PostAsJsonAsync("/api/geocode", new GeocodeRequest(routeInput.DestinationAddress));
+
+            if (!originResponse.IsSuccessStatusCode || !destResponse.IsSuccessStatusCode)
+            {
+                await DisplayAlert("Error", "Não foi possível encontrar um ou ambos os endereços.", "OK");
+                return;
+            }
+
+            var originGeocode = await originResponse.Content.ReadFromJsonAsync<GeocodeResponse>();
+            var destGeocode = await destResponse.Content.ReadFromJsonAsync<GeocodeResponse>();
+
+            if (originGeocode?.Coordinates is null || destGeocode?.Coordinates is null)
+            {
+                await DisplayAlert("Error", "Não foi possível encontrar coordenadas para um ou ambos os endereços.", "OK");
+                return;
+            }
+
+            // Plan route using the coordinates
+            var routeRequest = new RoutePlanRequest(
+                originGeocode.Coordinates,
+                destGeocode.Coordinates,
+                EvModelId: Preferences.Get("SelectedEVModelId", 1),
+                StartSoC: routeInput.StartSoC / 100.0 // Convert from 0-100 to 0.0-1.0
+            );
+
+            // Call route planning api endpoint
+            var routePlanResponse = await _httpClient.PostAsJsonAsync("/api/route/plan", routeRequest);
+            routePlanResponse.EnsureSuccessStatusCode();
+            // Read response as raw string
+            var responseBody = await routePlanResponse.Content.ReadAsStringAsync();
+            // Parse the string into a generic JSON Object
+            var routePlanNode = JsonNode.Parse(responseBody);
+
+            if (routePlanNode is null)
+            {
+                await DisplayAlert("Error", "Failed to parse route plan.", "OK");
+                return;
+            }
+
+            // Extract data required for popup
+            var totalTime = routePlanNode["totalTimeMinutes"]?.GetValue<int>() ?? 0;
+            var totalDistance = routePlanNode["totalDistanceKm"]?.GetValue<double>() ?? 0.0;
+            var stopsArray = routePlanNode["stops"]?.AsArray();
+
+            // Create an instance of our new popup
+            var tripPopup = new TripPreviewPopup();
+
+            // Set its BindingContext with the route data
+            tripPopup.BindingContext = new TripPreviewViewModel
+            {
+                TotalTime = $"{totalTime} min",
+                TotalDistance = $"{totalDistance:F1} km",
+                HasChargingStop = stopsArray?.Count > 0,
+                ChargingStopSummary = stopsArray?.Count > 0 ? $"{stopsArray.Count} paradas(s) planejadas" : ""
+            };
+
+            // Use ShowPopupAsync method to display our newly created popup on screen
+            await this.ShowPopupAsync(tripPopup);
+
+            var startConfirmed = await tripPopup.ResultTaskCompletionSource.Task;
+
+            // Check the result, the popup can be dismissed by tapping outside which returns null
+            if (startConfirmed)
+            {
+                await DrawRouteOnMap(routePlanNode);
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", $"An error occurred: {ex.Message}", "OK");
+        }
+
+
+        /* try
         {
             // Create a dummy request object
             var request = new RoutePlanRequest(
@@ -127,7 +249,7 @@ public partial class MapPage : ContentPage
         catch (Exception ex)
         {
             await DisplayAlert("Error", $"Failed to plan route: {ex.Message}", "OK");
-        }
+        } */
     }
 
     private async Task DrawRouteOnMap(JsonNode? routePlanResponse)
@@ -261,6 +383,8 @@ public partial class MapPage : ContentPage
 // In a larger app, these would be in a shared project.
 public record RoutePlanRequest(M_GeoPoint Origin, M_GeoPoint Destination, int EvModelId ,double StartSoC);
 public record RoutePlanResponse(string Polyline, List<ChargingStation> Stops, double TotalDistanceKm, int TotalTimeMinutes);
+public record GeocodeRequest(string Address);
+public record GeocodeResponse(M_GeoPoint? Coordinates);
 public record ChargingStation(string Name, M_GeoPoint Location, int PowerKw);
 public record M_GeoPoint(double Latitude, double Longitude);
 public record VoiceIntentRequest(string Text);

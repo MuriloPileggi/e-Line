@@ -4,54 +4,52 @@ namespace e_line.App;
 
 public partial class SettingsPage : ContentPage
 {
+    private List<EVModel> _evModels = new();
     private readonly HttpClient _httpClient;
+    private bool _isInitialized = false;
+
     public SettingsPage()
     {
         InitializeComponent();
-
-        // This handler is to bypass SSL certificate validation for local development
-        // This should be removed or handled properly for production
-        var handler = new HttpClientHandler
+        _httpClient = new HttpClient
         {
-            ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
+            BaseAddress = new Uri("https://e-line-ase2dnd5haacbnhj.eastus-01.azurewebsites.net")
         };
-
-        _httpClient = new HttpClient(handler);
-
-        // Use 10.0.2.2 to connect from the android emulator to host machine
-        _httpClient.BaseAddress = new Uri("https://e-line-ase2dnd5haacbnhj.eastus-01.azurewebsites.net");
     }
 
+    // Lifecycle method that runs every time the page is shown
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await TestApiConnection();
-    }
+        if (_isInitialized) return; // Only load the list from API once
 
-    private async Task TestApiConnection()
-    {
         try
         {
-            // Call our /api/test endpoint and read the JSON response
-            var response = await _httpClient.GetFromJsonAsync<ApiResponse>("/api/test");
+            // Load list of car models from Database
+            _evModels = await _httpClient.GetFromJsonAsync<List<EVModel>>("/api/evmodels") ?? new();
+            EVPicker.ItemsSource = _evModels;
+            _isInitialized = true;
 
-            if (response != null && !string.IsNullOrEmpty(response.Message))
+            // After loading, set the picker to the user's previously saved choice
+            var savedModelId = Preferences.Get("SelectedEVModelId", 1); // Default to ID 1
+            var selectedModel = _evModels.FirstOrDefault(m => m.Id == savedModelId);
+            if (selectedModel is not null)
             {
-                ApiMessageLabel.Text = $"Success! {response.Message}";
-                ApiMessageLabel.TextColor = Colors.Green;
+                EVPicker.SelectedItem = selectedModel;
             }
         }
         catch (Exception ex)
         {
-            // Display error if connection fails
-            ApiMessageLabel.Text = $"Connection failed: {ex.Message}";
-            ApiMessageLabel.TextColor = Colors.Red;
+            await DisplayAlert("Error", $"Could not load EV models: {ex.Message}", "OK");
         }
     }
-}
 
-// A simple class to match JSON structure from our API
-public class ApiResponse
-{
-    public string? Message { get; set; }
+    private void OnEVPickerSelectedIndexChanged(object? sender, EventArgs e)
+    {
+        if (EVPicker.SelectedItem is EVModel selectedModel)
+        {
+            // When the user selects a car, save its ID to device's local storage
+            Preferences.Set("SelectedEVModelId", selectedModel.Id);
+        }
+    }
 }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("e-line.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+557a8cbebc87292e1a79c89273233d6ea2555673")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9f35701aa8c38ed7c2a5a6ee7d3f5d6f7f2705d7")]
 [assembly: System.Reflection.AssemblyProductAttribute("e-line.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("e-line.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

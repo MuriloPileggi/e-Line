@@ -8,13 +8,13 @@
 
     <TabBar>
         <ShellContent
-            Title="Map"
+            Title="Mapa"
             Icon="map.svg"
             ContentTemplate="{DataTemplate local:MapPage}"
             Route="MapPage" />
 
         <ShellContent
-            Title="Settings"
+            Title="Configurações"
             Icon="cog.svg"
             ContentTemplate="{DataTemplate local:SettingsPage}"
             Route="SettingsPage" />

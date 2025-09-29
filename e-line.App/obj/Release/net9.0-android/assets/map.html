@@ -24,17 +24,17 @@
     <script type="text/javascript">
         // --- Configuration ---
         // Coordinates for São Paulo, Brazil
-        const saoPauloCenter = [-46.6333, -23.5505]; 
+        //const saoPauloCenter = [-46.6333, -23.5505]; 
 
         let map;
         let routeLayer;
         let pinsLayer;
 
         // --- Map Initialization ---
-        function initializeMap(subscriptionKey) {
+        function initializeMap(subscriptionKey, startLatitude, startLongitude) {
             map = new atlas.Map('myMap', {
-                center: saoPauloCenter,
-                zoom: 12,
+                center: [startLongitude, startLatitude],
+                zoom: 14,
                 language: 'pt-BR', // Set language to Brazilian Portuguese
                 authOptions: {
                     authType: 'subscriptionKey',

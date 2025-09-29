@@ -1,8 +1,11 @@
 using e_line.Api;
 using Azure;
+using Azure.Maps.Search;
+using Azure.Maps.Search.Models;
 using Azure.Maps.Routing;
 using Azure.Core.GeoJson;
 using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,14 +42,25 @@ builder.Services.AddHttpClient<OpenChargeMapService>();
 // Register Text To Speech Service
 builder.Services.AddSingleton<TextToSpeechService>();
 
+// Register DbContext service
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ElineDbContext>(options => options.UseSqlServer(connectionString));
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline
-if (app.Environment.IsDevelopment())
+// Create database and table on startup
+using (var scope = app.Services.CreateScope())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    var dbContext = scope.ServiceProvider.GetRequiredService<ElineDbContext>();
+    dbContext.Database.EnsureCreated();
 }
+
+// Configure the HTTP request pipeline
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
 
 app.UseHttpsRedirection();
 
@@ -55,14 +69,67 @@ app.UseHttpsRedirection();
 // New test endpoint
 app.MapGet("/api/test", () => new { Message = "Hello from local API!" });
 
+// Azure endpoint to get EV models from SQL database
+app.MapGet("/api/evmodels", async (ElineDbContext dbContext) =>
+{
+    var models = await dbContext.EVModels.ToListAsync();
+    return Results.Ok(models);
+});
+
+// Azure maps geocoding endpoint (Get coordinate from address)
+app.MapPost("/api/geocode", async (GeocodeRequest request,  ILogger<Program> logger) =>
+{
+    //logger.LogInformation("Geocoding request received for address: {Address}", request.Address);
+
+    if (string.IsNullOrWhiteSpace(request.Address))
+    {
+        return Results.BadRequest("O endereço não pode estar vazio.");
+    }
+
+    try
+    {
+        var searchClient = new MapsSearchClient(credential);
+
+        //logger.LogInformation("Calling Azure Maps geocoding service for: {Address}", request.Address);
+
+        var searchResult = await searchClient.GetGeocodingAsync(request.Address);
+
+        //logger.LogInformation("Azure Maps returned {FeatureCount} features", searchResult.Value.Features?.Count ?? 0);
+
+        if (searchResult.Value.Features == null || searchResult.Value.Features.Count == 0)
+        {
+            //logger.LogWarning("No geocoding results found for address: {Address}", request.Address);
+            return Results.NotFound(new { Message = "Endereço não encontrado." });
+        }
+
+        var firstFeature = searchResult.Value.Features[0];
+
+        var coords = firstFeature.Geometry.Coordinates;
+
+        var coordinates = new M_GeoPoint(coords[1], coords[0]);
+
+        var response = new GeocodeResponse(coordinates);
+
+        //logger.LogInformation("Geocoding successful. Address: {Address} -> Coordinates: {Lat}, {Lon}", 
+        //    request.Address, coordinates.Latitude, coordinates.Longitude);
+
+        return Results.Ok(response);
+    }
+    catch (System.Exception ex)
+    {
+        return Results.Problem($"Erro ao geocodificar endereço: {ex.Message}");
+    }
+});
+
 // Azure maps route planning endpoint
 app.MapPost("/api/route/plan", async (RoutePlanRequest request,
                                       MapsRoutingClient client,
                                       OpenChargeMapService ocmService,
+                                      ElineDbContext dbContext,
                                       EvOptimizer optimizer) =>
 {
     // Get selected EV Model
-    var evModel = EVDatabase.GetModelById(request.EvModelId);
+    var evModel = await dbContext.EVModels.FindAsync(request.EvModelId);
     if (evModel is null) return Results.BadRequest("Invalid EV Model");
 
     // Get route from Azure Maps
@@ -108,12 +175,12 @@ app.MapPost("/api/route/plan", async (RoutePlanRequest request,
     }
 
     // Create and return response
-        var response = new RoutePlanResponse(
-        polyline, 
-        requiredStops,
-        TotalDistanceKm: routeDistanceMeters / 1000.0,
-        TotalTimeMinutes: (int)Math.Ceiling(routeLeg.Summary.TravelTimeInSeconds.GetValueOrDefault() / 60.0)
-    );
+    var response = new RoutePlanResponse(
+    polyline,
+    requiredStops,
+    TotalDistanceKm: routeDistanceMeters / 1000.0,
+    TotalTimeMinutes: (int)Math.Ceiling(routeLeg.Summary.TravelTimeInSeconds.GetValueOrDefault() / 60.0)
+);
 
     return Results.Ok(response);
 });

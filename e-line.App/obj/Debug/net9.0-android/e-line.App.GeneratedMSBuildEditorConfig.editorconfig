@@ -48,6 +48,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = e_line.App.Resources.Style
 build_metadata.AdditionalFiles.TargetPath = Resources/Styles/Styles.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources/Styles/Styles.xaml
 
+[/home/mdm/Documents/e-Line/e-line.App/RouteInputPopup.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = e_line.App.RouteInputPopup.xaml
+build_metadata.AdditionalFiles.TargetPath = RouteInputPopup.xaml
+build_metadata.AdditionalFiles.RelativePath = RouteInputPopup.xaml
+
 [/home/mdm/Documents/e-Line/e-line.App/SettingsPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = e_line.App.SettingsPage.xaml

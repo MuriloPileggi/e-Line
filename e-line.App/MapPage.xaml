@@ -11,8 +11,8 @@
                  Navigated="OnMapWebViewNavigated" />
 
         <Button x:Name="PlanRouteButton"
-                Text="Plan Mock Route"
-                Clicked="OnPlanRouteClicked"
+                Text="Planejar Nova Rota"
+                Clicked="OnPlanNewRouteClicked"
                 HorizontalOptions="Center"
                 VerticalOptions="End"
                 Margin="20" />

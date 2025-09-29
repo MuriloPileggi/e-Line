@@ -507,3 +507,4 @@
 /home/mdm/Documents/e-Line/e-line.App/obj/Release/net9.0-android/stamp/_GenerateJavaStubs.stamp
 /home/mdm/Documents/e-Line/e-line.App/obj/Release/net9.0-android/stamp/_GeneratePackageManagerJava.stamp
 /home/mdm/Documents/e-Line/e-line.App/obj/Release/net9.0-android/stamp/_ResolveLibraryProjectImports.stamp
+/home/mdm/Documents/e-Line/e-line.App/obj/Release/net9.0-android/android/src/crc64f62664462a8937a9/SingleLocationListener.java

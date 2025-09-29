@@ -19,7 +19,7 @@ public class OpenChargeMapService
         var chargers = new List<ChargingStation>();
 
         // Construct the query URL for the OCM API
-        var requestUri = $"/poi/?output=json&latitude={point.Latitude}&longitude={point.Longitude}&distance=20&distanceunit=km&maxresults=10&key={_apiKey}";
+        var requestUri = $"/poi/?output=json&latitude={point.Latitude}&longitude={point.Longitude}&distance=20&distanceunit=km&maxresults=1&key={_apiKey}";
 
         try
         {
