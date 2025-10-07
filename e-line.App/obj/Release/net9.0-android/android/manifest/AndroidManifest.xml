@@ -18,7 +18,7 @@
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
   <permission android:name="com.companyname.eline.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" android:protectionLevel="signature" />
   <uses-permission android:name="com.companyname.eline.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-  <application android:name="crc64090c2abdffb74e23.MainApplication" android:allowBackup="true" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:extractNativeLibs="true" android:icon="@mipmap/appicon" android:label="e-line.App" android:networkSecurityConfig="@xml/network_security_config" android:roundIcon="@mipmap/appicon_round" android:supportsRtl="true">
+  <application android:name="crc64090c2abdffb74e23.MainApplication" android:allowBackup="true" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:extractNativeLibs="true" android:icon="@mipmap/icon" android:label="E-line" android:networkSecurityConfig="@xml/network_security_config" android:roundIcon="@mipmap/icon_round" android:supportsRtl="true">
     <service android:name="communityToolkit.maui.media.services" android:enabled="true" android:exported="false" android:foregroundServiceType="mediaPlayback">
       <intent-filter>
         <action android:name="androidx.media3.session.MediaSessionService" />

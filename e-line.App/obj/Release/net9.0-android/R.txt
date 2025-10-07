@@ -4281,10 +4281,10 @@ int layout select_dialog_singlechoice_material 0x7f0d008a
 int layout shellcontent 0x7f0d008b
 int layout support_simple_spinner_dropdown_item 0x7f0d008c
 int layout textureview 0x7f0d008d
-int mipmap appicon 0x7f0f0000
-int mipmap appicon_background 0x7f0f0001
-int mipmap appicon_foreground 0x7f0f0002
-int mipmap appicon_round 0x7f0f0003
+int mipmap icon 0x7f0f0000
+int mipmap icon_background 0x7f0f0001
+int mipmap icon_foreground 0x7f0f0002
+int mipmap icon_round 0x7f0f0003
 int plurals exo_controls_fastforward_by_amount_description 0x7f100000
 int plurals exo_controls_rewind_by_amount_description 0x7f100001
 int plurals mtrl_badge_content_description 0x7f100002

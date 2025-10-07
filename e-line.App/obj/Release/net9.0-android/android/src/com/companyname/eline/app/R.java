@@ -13334,10 +13334,10 @@ public final class R {
     public static final int textureview=0x7f0d008d;
   }
   public static final class mipmap {
-    public static final int appicon=0x7f0f0000;
-    public static final int appicon_background=0x7f0f0001;
-    public static final int appicon_foreground=0x7f0f0002;
-    public static final int appicon_round=0x7f0f0003;
+    public static final int icon=0x7f0f0000;
+    public static final int icon_background=0x7f0f0001;
+    public static final int icon_foreground=0x7f0f0002;
+    public static final int icon_round=0x7f0f0003;
   }
   public static final class plurals {
     public static final int exo_controls_fastforward_by_amount_description=0x7f100000;

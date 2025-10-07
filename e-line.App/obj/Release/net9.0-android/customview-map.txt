@@ -2,6 +2,8 @@
 @string/appbar_scrolling_view_behavior;/home/mdm/Documents/e-Line/e-line.App/obj/Release/net9.0-android/lp/190/jl/res/layout/navigationlayout.xml
 adaptive-icon;obj/Release/net9.0-android/resizetizer/r/mipmap-anydpi-v26/appicon_round.xml
 adaptive-icon;obj/Release/net9.0-android/resizetizer/r/mipmap-anydpi-v26/appicon.xml
+adaptive-icon;obj/Release/net9.0-android/resizetizer/r/mipmap-anydpi-v26/icon_round.xml
+adaptive-icon;obj/Release/net9.0-android/resizetizer/r/mipmap-anydpi-v26/icon.xml
 alpha;/home/mdm/Documents/e-Line/e-line.App/obj/Release/net9.0-android/lp/188/jl/res/anim/enterfromleft.xml
 alpha;/home/mdm/Documents/e-Line/e-line.App/obj/Release/net9.0-android/lp/188/jl/res/anim/exittoleft.xml
 alpha;/home/mdm/Documents/e-Line/e-line.App/obj/Release/net9.0-android/lp/190/jl/res/anim/nav_default_enter_anim.xml
@@ -17,6 +19,8 @@ androidx.media3.ui.PlayerView;/home/mdm/Documents/e-Line/e-line.App/obj/Release/
 attr;/home/mdm/Documents/e-Line/e-line.App/obj/Release/net9.0-android/lp/190/jl/res/values/attr.xml
 background;obj/Release/net9.0-android/resizetizer/r/mipmap-anydpi-v26/appicon_round.xml
 background;obj/Release/net9.0-android/resizetizer/r/mipmap-anydpi-v26/appicon.xml
+background;obj/Release/net9.0-android/resizetizer/r/mipmap-anydpi-v26/icon_round.xml
+background;obj/Release/net9.0-android/resizetizer/r/mipmap-anydpi-v26/icon.xml
 bitmap;obj/Release/net9.0-android/resizetizer/sp/drawable-v31/maui_splash_image.xml
 bitmap;obj/Release/net9.0-android/resizetizer/sp/drawable/maui_splash_image.xml
 cache-path;/home/mdm/Documents/e-Line/e-line.App/obj/Release/net9.0-android/lp/191/jl/res/xml/microsoft_maui_essentials_fileprovider_file_paths.xml
@@ -33,6 +37,8 @@ external-cache-path;/home/mdm/Documents/e-Line/e-line.App/obj/Release/net9.0-and
 external-path;/home/mdm/Documents/e-Line/e-line.App/obj/Release/net9.0-android/lp/191/jl/res/xml/microsoft_maui_essentials_fileprovider_file_paths.xml
 foreground;obj/Release/net9.0-android/resizetizer/r/mipmap-anydpi-v26/appicon_round.xml
 foreground;obj/Release/net9.0-android/resizetizer/r/mipmap-anydpi-v26/appicon.xml
+foreground;obj/Release/net9.0-android/resizetizer/r/mipmap-anydpi-v26/icon_round.xml
+foreground;obj/Release/net9.0-android/resizetizer/r/mipmap-anydpi-v26/icon.xml
 item;/home/mdm/Documents/e-Line/e-line.App/obj/Release/net9.0-android/lp/189/jl/res/values/values.xml
 item;/home/mdm/Documents/e-Line/e-line.App/obj/Release/net9.0-android/lp/190/jl/res/drawable/maui_splash.xml
 item;/home/mdm/Documents/e-Line/e-line.App/obj/Release/net9.0-android/lp/190/jl/res/values-v35/styles.xml
@@ -47,6 +53,8 @@ layer-list;obj/Release/net9.0-android/resizetizer/sp/drawable/maui_splash_image.
 microsoft.maui.controls.platform.compatibility.ShellFlyoutLayout;/home/mdm/Documents/e-Line/e-line.App/obj/Release/net9.0-android/lp/188/jl/res/layout/flyoutcontent.xml
 monochrome;obj/Release/net9.0-android/resizetizer/r/mipmap-anydpi-v26/appicon_round.xml
 monochrome;obj/Release/net9.0-android/resizetizer/r/mipmap-anydpi-v26/appicon.xml
+monochrome;obj/Release/net9.0-android/resizetizer/r/mipmap-anydpi-v26/icon_round.xml
+monochrome;obj/Release/net9.0-android/resizetizer/r/mipmap-anydpi-v26/icon.xml
 network-security-config;obj/Release/net9.0-android/res/xml/network_security_config.xml
 paths;/home/mdm/Documents/e-Line/e-line.App/obj/Release/net9.0-android/lp/191/jl/res/xml/microsoft_maui_essentials_fileprovider_file_paths.xml
 resources;/home/mdm/Documents/e-Line/e-line.App/obj/Release/net9.0-android/lp/188/jl/res/values/strings.xml
